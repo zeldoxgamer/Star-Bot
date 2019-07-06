@@ -139,32 +139,7 @@ client.on('guildMemberAdd', async member => { // membed add event
 
 
 
- client.on("message", message => {  //iTzMurtaja
-
-    if(message.content.startsWith(prefix + "emoji")) { //iTzMurtaja
-
-        if(message.author.bot) return; //iTzMurtaja
-
-        var emojiid =  message.content.split(" ").slice(1).join(" ") //iTzMurtaja
-
-        console.log(emojiid) //iTzMurtaja
-
-        if(emojiid.length < "18" || emojiid.length > "18" || isNaN(emojiid)) return  message.channel.send(`- Usage
-
-${prefix}emoji <EmojiID>`); //iTzMurtaja
-
-        else    //iTzMurtaja
-
-        message.channel.send("This is the emoji that you requested:-",
-
-          { //iTzMurtaja
-
-            files: [`https://cdn.discordapp.com/emojis/${emojiid}.png`]
-
-          }) //iTzMurtaja
-
-        })  //iTzMurtaja
-
+ 
  const say = JSON.parse(fs.readFileSync('./say.json', 'utf8'))
  
 client.on("message", message =>
