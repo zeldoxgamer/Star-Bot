@@ -413,11 +413,18 @@ let embed = new Discord.RichEmbed()
 .addField(`     **${prefix}dar**  ` ,' **لمسح جميع الرومات** ')
 .setColor('RED')
 message.author.sendEmbed(embed);
+}
+});
+client.on('message', message => {
+    if (message.content.startsWith(prefix + "help-admins")) {
+let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
-.addField('☑** | تم الارسال خاص**')
+ .addField('☑** | تم الارسال خاص**') 
+.setColor('GREEN')
 message.channel.sendEmbed(embed);
 }
 });
+
 
 client.on('message', message => {
     if (message.content.startsWith(prefix + "help-general")) {
@@ -431,6 +438,15 @@ let embed = new Discord.RichEmbed()
 .addField(`     **${prefix}profile**  ` ,' **لمعرفة معلومات الحساب** ')
 .setColor('GREEN')
 message.author.sendEmbed(embed);
+}
+});
+client.on('message', message => {
+    if (message.content.startsWith(prefix + "help-general")) {
+let embed = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)
+ .addField('☑** | تم الارسال خاص**') 
+.setColor('GREEN')
+message.channel.sendEmbed(embed);
 }
 });
 
@@ -450,6 +466,15 @@ let embed = new Discord.RichEmbed()
 message.author.sendEmbed(embed);
 }
 });
+client.on('message', message => {
+    if (message.content.startsWith(prefix + "help-roles")) {
+let embed = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)
+ .addField('☑** | تم الارسال خاص**') 
+.setColor('GREEN')
+message.channel.sendEmbed(embed);
+}
+});
 
 client.on('message', message => {
     if (message.content.startsWith(prefix + "help-support")) {
@@ -462,9 +487,19 @@ let embed = new Discord.RichEmbed()
 message.author.sendEmbed(embed);
 }
 });
+client.on('message', message => {
+    if (message.content.startsWith(prefix + "help-support")) {
+let embed = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)
+ .addField('☑** | تم الارسال خاص**') 
+.setColor('GREEN')
+message.channel.sendEmbed(embed);
+}
+});
+
 
 client.on('message', message => {
-    if (message.content.startsWith(prefix + "help-admins")) {
+    if (message.content.startsWith(prefix + "help-ticket")) {
 let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
 .addField(`     **soon** ` ,' **قريبا** ')
@@ -472,6 +507,16 @@ let embed = new Discord.RichEmbed()
 message.author.sendEmbed(embed);
 }
 });
+client.on('message', message => {
+    if (message.content.startsWith(prefix + "help-ticket")) {
+let embed = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)
+ .addField('☑** | تم الارسال خاص**') 
+.setColor('GREEN')
+message.channel.sendEmbed(embed);
+}
+});
+
 
 
 client.on('message', message => {
@@ -483,6 +528,16 @@ let embed = new Discord.RichEmbed()
 message.author.sendEmbed(embed);
 }
 });
+client.on('message', message => {
+    if (message.content.startsWith(prefix + "help-music")) {
+let embed = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)
+ .addField('☑** | تم الارسال خاص**') 
+.setColor('GREEN')
+message.channel.sendEmbed(embed);
+}
+});
+
 
 
 
