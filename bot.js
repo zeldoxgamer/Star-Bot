@@ -8,24 +8,7 @@
  const token = 'BOT_TOKEN'; 
 
 
-client.on('message',message =>{
-  var command = message.content.toLowerCase().split(" ")[0];
-    var args = message.content.toLowerCase().split(" ");
-    var userM = message.mentions.users.first()
-    if(command == prefix + 'unban') {
-        if(!message.member.hasPermission('BAN_MEMBERS')) return message.channel.send(':no_entry: | You dont have **BAN_MEMBERS** Permission!');
-        if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.channel.send(':no_entry: | I dont have **BAN_MEMBERS** Permission!');
-        if(!args[1]) return  message.channel.send(':information_source:  `#kick <@id>` يجب تحديد شخص');
-        if(args[1].length < 16) return message.reply(':no_entry: | This ID is not id user!');
-        message.guild.fetchBans().then(bans => {
-            var Found = bans.find(m => m.id === args[1]);
-            if(!Found) return message.channel.send(`:no_entry: | <@${message.author.id}> This preson not have any ban from this server! :unlock:`);
-            message.guild.unban(args[1]);
-            message.channel.send(`:white_check_mark: Successfully \`\`UNBANNED\`\` <@${args[1]}> From the server!`);
-            }
 
-        )}
-      })
 
 
  client.on('message', message => {
@@ -77,64 +60,9 @@ client.on("message", message => {
     }
 });
 
-client.on('message', message => {
-  var prefix = "#";
-    if (message.author.kick) return;
-    if (!message.content.startsWith(prefix)) return;
-  
-    let command = message.content.split(" ")[0];
-    command = command.slice(prefix.length);
-  
-    let args = message.content.split(" ").slice(1);
-  
-    if (command == "kick") {
-      if (!message.channel.guild) return;
-  
-    if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("You Don't Have KICK_MEMBERS Permission").then(msg => msg.delete(5000));
-    if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("I Don't Have KICK_Members Permission");
-    let user = message.mentions.users.first();
-    let reason = message.content.split(" ").slice(2).join(" ");
-  
-    if (message.mentions.users.size < 1) return message.reply(":information_source: `#kick @OrochiX` يجب تحديد شخص ");
-    if(!reason) return message.reply ("Type The Reason Please");
-    if (!message.guild.member(user)
-    .bannable) return message.reply("I can not be higher than my rank");
-  
-    message.guild.member(user).kick(7, user);
-  message.channel.send(`**:white_check_mark: ${user} has been kicked ! **`)
-  user.send(`**You are has been kicked in ${message.guild.name} reason: ${reason}**`)
-      message.delete()
-  }
-  });
 
 
-client.on('message', message => {
-  if (message.author.x5bz) return;
-  if (!message.content.startsWith(prefix)) return;
 
-  let command = message.content.split(" ")[0];
-  command = command.slice(prefix.length);
-
-  let args = message.content.split(" ").slice(1);
-
-  if (command == "ban") {
-    if (!message.channel.guild) return;
-         
-  if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply("**You Don't Have ` BAN_MEMBERS ` Permission**");
-  if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.reply("**I Don't Have ` BAN_MEMBERS ` Permission**");
-  let user = message.mentions.users.first();
-  let reason = message.content.split(" ").slice(2).join(" ");
-  /*let b5bzlog = client.channels.find("name", "5bz-log");
-  if(!b5bzlog) return message.reply("I've detected that this server doesn't have a 5bz-log text channel.");*/
-  if (message.mentions.users.size < 1) return message.reply("**Mention Someone**");
-  if(!reason) return;
-  if (!message.guild.member(user)
-  .bannable) return message.reply("**This person has a grade higher than his bot rank**");
-
-  message.guild.member(user).ban(7, user);
-  message.channel.send(`**:white_check_mark: ${user} has been banned :airplane: **`)
-user.send(`You Are Has Been Banned Permanently In ${message.guild.name} reason: ${reason}`)
-  }})
 
 
 
@@ -429,19 +357,19 @@ client.on('message', message => {
     if (message.content.startsWith(prefix + "help")) {
 let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
-.addField(`     **${prefix}help-admins** ` ,' **اوامر اداريه** ')
-.addField(`     **${prefix}help-general** ` ,' **اوامر عامه** ')
-.addField(`     **${prefix}help-music** ` ,' **اومر ميوزك** ')
-.addField(`     **${prefix}help-ticket** ` ,' **اوامر تيكت** ')
-.addField(`     **${prefix}help-roles** ` ,' **اوامر الرتب** ')
-.addField(`     **${prefix}help-support** ` ,' **اوامر سيبورت البوت** ')
+.addField(`     **${prefix}h-admins** ` ,' **اوامر اداريه** ')
+.addField(`     **${prefix}h-general** ` ,' **اوامر عامه** ')
+.addField(`     **${prefix}h-music** ` ,' **اومر ميوزك** ')
+.addField(`     **${prefix}h-ticket** ` ,' **اوامر تيكت** ')
+.addField(`     **${prefix}h-roles** ` ,' **اوامر الرتب** ')
+.addField(`     **${prefix}h-support** ` ,' **اوامر سيبورت البوت** ')
 .setColor('YELLOW')
 message.channel.sendEmbed(embed);
 }
 });
 
 client.on('message', message => {
-    if (message.content.startsWith(prefix + "help-admins")) {
+    if (message.content.startsWith(prefix + "h-admins")) {
 let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
 .addField(`     **${prefix}clear** ` ,' **مسح الشات** ')
@@ -459,7 +387,7 @@ message.author.sendEmbed(embed);
 }
 });
 client.on('message', message => {
-    if (message.content.startsWith(prefix + "help-admins")) {
+    if (message.content.startsWith(prefix + "h-admins")) {
 let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
  .addField('☑** | تم الارسال خاص**') 
@@ -470,7 +398,7 @@ message.channel.sendEmbed(embed);
 
 
 client.on('message', message => {
-    if (message.content.startsWith(prefix + "help-general")) {
+    if (message.content.startsWith(prefix + "h-general")) {
 let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
 .addField(`     **${prefix}id** ` ,' **لمعرفة الهوية** ')
@@ -485,7 +413,7 @@ message.author.sendEmbed(embed);
 }
 });
 client.on('message', message => {
-    if (message.content.startsWith(prefix + "help-general")) {
+    if (message.content.startsWith(prefix + "h-general")) {
 let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
  .addField('☑** | تم الارسال خاص**') 
@@ -495,7 +423,7 @@ message.channel.sendEmbed(embed);
 });
 
 client.on('message', message => {
-    if (message.content.startsWith(prefix + "help-roles")) {
+    if (message.content.startsWith(prefix + "h-roles")) {
 let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
 .addField(`     **${prefix}role** ` , ' **لاعطاء رتبة** ')
@@ -511,7 +439,7 @@ message.author.sendEmbed(embed);
 }
 });
 client.on('message', message => {
-    if (message.content.startsWith(prefix + "help-roles")) {
+    if (message.content.startsWith(prefix + "h-roles")) {
 let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
  .addField('☑** | تم الارسال خاص**') 
@@ -521,7 +449,7 @@ message.channel.sendEmbed(embed);
 });
 
 client.on('message', message => {
-    if (message.content.startsWith(prefix + "help-support")) {
+    if (message.content.startsWith(prefix + "h-support")) {
 let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
 .addField(`     **${prefix}support** ` ,' **سيرفر الدعم الفني للبوت** ')
@@ -532,7 +460,7 @@ message.author.sendEmbed(embed);
 }
 });
 client.on('message', message => {
-    if (message.content.startsWith(prefix + "help-support")) {
+    if (message.content.startsWith(prefix + "h-support")) {
 let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
  .addField('☑** | تم الارسال خاص**') 
@@ -543,7 +471,7 @@ message.channel.sendEmbed(embed);
 
 
 client.on('message', message => {
-    if (message.content.startsWith(prefix + "help-ticket")) {
+    if (message.content.startsWith(prefix + "h-ticket")) {
 let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
 .addField(`     **soon** ` ,' **قريبا** ')
@@ -552,7 +480,7 @@ message.author.sendEmbed(embed);
 }
 });
 client.on('message', message => {
-    if (message.content.startsWith(prefix + "help-ticket")) {
+    if (message.content.startsWith(prefix + "h-ticket")) {
 let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
  .addField('☑** | تم الارسال خاص**') 
@@ -573,7 +501,7 @@ message.author.sendEmbed(embed);
 }
 });
 client.on('message', message => {
-    if (message.content.startsWith(prefix + "help-music")) {
+    if (message.content.startsWith(prefix + "h-music")) {
 let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
  .addField('☑** | تم الارسال خاص**') 
