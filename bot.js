@@ -6,90 +6,136 @@
  const Canvas = require("canvas"); 
  const prefix = "#";
  const token = 'BOT_TOKEN'; 
+client.on('message', message => {
+  if (message.author.x5bz) return;
+  if (!message.content.startsWith(prefix)) return;
 
-
-const ms = require("ms");
-  client.on("message", message => {
- if(!message.channel.guild) return;  
-  if (message.author.bot) return;
- 
   let command = message.content.split(" ")[0];
- 
-  if (message.content.split(" ")[0].toLowerCase() === prefix + "unmute") {
-        if (!message.member.hasPermission('MANAGE_ROLES')) return;
+  command = command.slice(prefix.length);
+
+  let args = message.content.split(" ").slice(1);
+
+  if (command == "ban") {
+    if (!message.channel.guild) return;
+         
+  if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply("**You Don't Have ` BAN_MEMBERS ` Permission**");
+  if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.reply("**I Don't Have ` BAN_MEMBERS ` Permission**");
   let user = message.mentions.users.first();
-  let modlog = client.channels.find('name', 'log');
-  let muteRole = client.guilds.get(message.guild.id).roles.find('name', 'Muted');
-  if (!muteRole) return message.reply(" I Can’t Find 'Muted' Role ").catch(console.error).then(message => message.delete(4000))
-  if (message.mentions.users.size < 1) return message.reply(' Error : ``منشن الشخص``').catch(console.error).then(message => message.delete(4000))
-  if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return;
+  let reason = message.content.split(" ").slice(2).join(" ");
+  /*let b5bzlog = client.channels.find("name", "5bz-log");
+  if(!b5bzlog) return message.reply("I've detected that this server doesn't have a 5bz-log text channel.");*/
+  if (message.mentions.users.size < 1) return message.reply("**Mention Someone**");
+  if(!reason) return;
+  if (!message.guild.member(user)
+  .bannable) return message.reply("**This person has a grade higher than his bot rank**");
+
+  message.guild.member(user).ban(7, user);
+  message.channel.send(`**:white_check_mark: ${user} has been banned :airplane: **`)
+user.send(`You Are Has Been Banned Permanently In ${message.guild.name} reason: ${reason}`)
+  }})
+
+ client.on('message', message => {
+
+   if(!message.channel.guild) return;
+
+if(message.content.startsWith(prefix + 'bc')) {
+
+if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
+
+if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
+
+let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
+
+let BcList = new Discord.RichEmbed()
+
+.setThumbnail(message.author.avatarURL)
+
+.setAuthor(`محتوى الرساله ${args}`)
+
+.setDescription(`برودكاست بـ امبد 📝\nبرودكاست بدون امبد✏ \nلديك دقيقه للأختيار قبل الغاء البرودكاست\nيمكنك اضافة اسم السيرفر في البرودكاست عن طريق كتابة <server>\nيمكنك اضافة اسم المرسل في البرودكاست عن طريق كتاية <by>\nيمكنك منشنة العضو في الرساله عن طريق كتابة <user>`)
+
+if (!args) return message.reply('**يجب عليك كتابة كلمة او جملة لإرسال البرودكاست**');message.channel.send(BcList).then(msg => {
+
+msg.react('📝')
+
+.then(() => msg.react('✏'))
+
+.then(() =>msg.react('📝'))
+
  
-  if (message.guild.member(user).removeRole(muteRole.id)) {
-      return message.reply("تم فك الميوت☑").catch(console.error).then(message => message.delete(4000))
-  } else {
-    message.guild.member(user).removeRole(muteRole).then(() => {
-      return message.reply("تم فك الميوت☑").catch(console.error).then(message => message.delete(4000))
-    });
-  }
+
+let EmbedBcFilter = (reaction, user) => reaction.emoji.name === '📝' && user.id === message.author.id;
+
+let NormalBcFilter = (reaction, user) => reaction.emoji.name === '✏' && user.id === message.author.id;
+
  
-};
+
+let EmbedBc = msg.createReactionCollector(EmbedBcFilter, { time: 60000 });
+
+let NormalBc = msg.createReactionCollector(NormalBcFilter, { time: 60000 });
+
  
-});
+
+ 
+
+EmbedBc.on("collect", r => {
+
+ 
+
+message.channel.send(`:ballot_box_with_check: تم ارسال الرساله بنجاح`).then(m => m.delete(5000));
+
+message.guild.members.forEach(m => {
+
+let EmbedRep = args.replace('<server>' ,message.guild.name).replace('<user>', m).replace('<by>', `${message.author.username}#${message.author.discriminator}`)
+
+var bc = new
+
+Discord.RichEmbed()
+
+.setColor('RANDOM')
+
+.setDescription(EmbedRep)
+
+.setThumbnail(message.author.avatarURL)
+
+m.send({ embed: bc })
+
+msg.delete();
+
+})
+
+})
+
+NormalBc.on("collect", r => {
+
+  message.channel.send(`:ballot_box_with_check: تم ارسال الرساله بنجاح`).then(m => m.delete(5000));
+
+message.guild.members.forEach(m => {
+
+let NormalRep = args.replace('<server>' ,message.guild.name).replace('<user>', m).replace('<by>', `${message.author.username}#${message.author.discriminator}`)
+
+m.send(NormalRep);
+
+msg.delete();
+
+})
+
+})
+
+})
+
+}
+
+}); 
+
+
+
+
 
   
 
 
-client.on('message',function(message) {
 
- if(!message.channel.guild) return;    let messageArray = message.content.split(' ');
-
-    let muteRole =  message.guild.roles.find('name', 'Muted');
-
-    let muteMember = message.mentions.members.first();
-
-    let muteReason = messageArray[2];
-
-    let muteDuration = messageArray[3];
-
- if (message.content.split(" ")[0].toLowerCase() === prefix + "mute") {
-
-           
-
-  if (message.author.bot) return;
-
-       if(!muteRole) return message.guild.createRole({name: 'Muted'}).then(message.guild.channels.forEach(chan => chan.overwritePermissions(muteRole, {SEND_MESSAGES:false,ADD_REACTIONS:false})));
-
-       if(!message.guild.member(message.author).hasPermission("MANAGE_ROLES")) return message.channel.send('ليست لديك رتبة لاعطاء ميوت');
-
-       if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.channel.send(' ليست لدي البرمشن');
-
-       if(!muteMember) return message.channel.send(' المرجوا منشنت الشخص').then(message => message.delete(4000))
-
-       if(!muteReason) return message.channel.send(' المرجو كتابة سبب الميوت').then(message => message.delete(4000))
-
-       if(!muteDuration) return message.channel.send(' المرجو منك وضع مدة الميوت`` \n Ex: #mute @user reason 1m ').then(message => message.delete(4000))
-
-       if(!muteDuration.match(/[1-7][s,m,h,d,w]/g)) return message.channel.send(' لقد تم اعطائه ميوت سابقا').then(message => message.delete(4000))
-
-       message.channel.send(`لقد تم اعطاء${muteMember} ميوت 🤐  .`).then(message => message.delete(5000))
-
-       muteMember.addRole(muteRole);
-
-       muteMember.setMute(true)
-
-       .then(() => { setTimeout(() => {
-
-           muteMember.removeRole(muteRole)
-
-           muteMember.setMute(false)
-
-       }, mmss(muteDuration));
-
-       });
-
-   }
-
-});
 
          
          
@@ -101,27 +147,7 @@ client.on('message',function(message) {
  
 
 
-client.on("message", message => {
 
-if(message.content.startsWith(prefix + "setnick")){
-
-if(message.author.bot || message.channel.type == "dm" || !message.member.hasPermission("MANAGE_NICKNAMES") || !message.guild.member(client.user).hasPermission("MANAGE_NICKNAMES")) return;
-
-var user = message.mentions.members.first();
-
-var args = message.content.split(" ").slice(2);
-
-var nick = args.join(" ");
-
-if(!user || !args) return message.channel.send(`**• | Usage:** ${prefix}setnick \`\`@Name\`\` nickname`);
-
-message.guild.member(user.user).setNickname(`${nick}`);
-
-message.channel.send(`Successfully changed **${user}** nickname to **${nick}**`);
-
-}
-
-});
 
  
 
