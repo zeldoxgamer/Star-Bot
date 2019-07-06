@@ -382,7 +382,7 @@ if(message.content.startsWith(prefix + 'set-say')) {
 }
 })
 
-if (message.content === `${prefix}help`) {
+if (message.content === '#help') {
          let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)    
 .addField(`     **${prefix}help-admins** ` ,' **اوامر اداريه** ')
@@ -396,7 +396,7 @@ message.author.sendEmbed(embed);
 }
 });
 
-if (message.content === `${prefix}help-admins`) {
+if (message.content === '#help-admins') {
          let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)    
 .addField(`     **${prefix}clear** ` ,' **مسح الشات** ')
@@ -414,7 +414,7 @@ message.author.sendEmbed(embed);
 }
 });
 
-if (message.content === `${prefix}help-general`) {
+if (message.content === '#help-general') {
          let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)  
 .addField(`     **${prefix}id** ` ,' **لمعرفة الهوية** ')
@@ -428,7 +428,7 @@ message.author.sendEmbed(embed);
 }
 });
 
-if (message.content === `${prefix}help-roles`) {
+if (message.content === '#help-roles') {
          let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)    
 .addField(`     **${prefix}role** ` , ' **لاعطاء رتبة** ')
@@ -444,7 +444,7 @@ message.author.sendEmbed(embed);
 }
 });
 
-if (message.content === `${prefix}help-support`) {
+if (message.content === '#help-support') {
          let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)    
 .addField(`     **${prefix}support** ` ,' **سيرفر الدعم الفني للبوت** ')
@@ -456,7 +456,7 @@ message.author.sendEmbed(embed);
  });
 
 
-if (message.content === `${prefix}help-ticket`) {
+if (message.content === '#help-ticket') {
          let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)    
 .addField(`     **soon** ` ,' **قريبا** ')
@@ -466,7 +466,7 @@ message.author.sendEmbed(embed);
 });
 
 
-if (message.content === `${prefix}help-music`) {
+if (message.content === '#help-music') {
          let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)    
 .addField(`     **soon** ` ,' **قريبا** ')
