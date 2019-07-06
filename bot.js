@@ -383,7 +383,7 @@ if(message.content.startsWith(prefix + 'set-say')) {
 })
 
 client.on('message', message => {
-    if (message.content.startsWith(prefix + "help")) {
+    if (message.content.startsWith(prefix + "helps")) {
 let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
 .addField(`     **${prefix}help-admins** ` ,' **اوامر اداريه** ')
@@ -393,7 +393,7 @@ let embed = new Discord.RichEmbed()
 .addField(`     **${prefix}help-roles** ` ,' **اوامر الرتب** ')
 .addField(`     **${prefix}help-support** ` ,' **اوامر سيبورت البوت** ')
 .setColor('YELLOW')
-message.channel.sendEmbed(embed);
+message.author.sendEmbed(embed);
 }
 });
 
@@ -412,7 +412,7 @@ let embed = new Discord.RichEmbed()
 .addField(`     **${prefix}openroom** ` ,' **لفتح الشات** ')
 .addField(`     **${prefix}dar**  ` ,' **لمسح جميع الرومات** ')
 .setColor('RED')
-message.channel.sendEmbed(embed);
+message.author.sendEmbed(embed);
 }
 });
 
@@ -427,7 +427,7 @@ let embed = new Discord.RichEmbed()
 .addField(`     **${prefix}av-ser** ` ,' **لرؤيت صورت السيرفر** ')
 .addField(`     **${prefix}profile**  ` ,' **لمعرفة معلومات الحساب** ')
 .setColor('GREEN')
-message.channel.sendEmbed(embed);
+message.author.sendEmbed(embed);
 }
 });
 
@@ -444,7 +444,7 @@ let embed = new Discord.RichEmbed()
 .addField(`     **${prefix}-role bots** ` ,' **لنزع الرتبة من جميع البوتات** ')
 .addField(`     **${prefix}-role all**  ` ,' **لنزع الرتبة للجميع** ')
 .setColor('PINK')
-message.channel.sendEmbed(embed);
+message.author.sendEmbed(embed);
 }
 });
 
@@ -456,17 +456,18 @@ let embed = new Discord.RichEmbed()
 .addField(`     **${prefix}own**  ` ,' **لمعرفة صاحب البوت** ')
 .addField(`     **${prefix}ping** ` ,' **لمعرفة سرعة اتصال البوت** ')
 .setColor('ORANGE')
-message.channel.sendEmbed(embed);
+message.author.sendEmbed(embed);
 }
-});
+ });
+
 
 client.on('message', message => {
-    if (message.content.startsWith(prefix + "help-admins")) {
-let embed = new Discord.RichEmbed()
+    if (message.content.startsWith(prefix + "help-ticket")) {
+ let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
 .addField(`     **soon** ` ,' **قريبا** ')
 .setColor('WHITE')
-message.channel.sendEmbed(embed);
+message.author.sendEmbed(embed);
 }
 });
 
@@ -477,7 +478,7 @@ let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
 .addField(`     **soon** ` ,' **قريبا** ')
 .setColor('WHITE')
-message.channel.sendEmbed(embed);
+message.author.sendEmbed(embed);
 }
 });
 
