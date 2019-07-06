@@ -10,7 +10,7 @@
 
 
 const jimp = require('jimp');
-const Canvas = require
+
 
 client.on('guildMemberAdd', member => {
      const welcomer =  member.guild.channels.find('name', 'welcome');
