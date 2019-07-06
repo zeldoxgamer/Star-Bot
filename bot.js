@@ -383,7 +383,7 @@ if(message.content.startsWith(prefix + 'set-say')) {
 })
 
 client.on('message', message => {
-    if (message.content.startsWith(prefix + "help")) {
+    if (message.content.startsWith(prefix + "helps")) {
 let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
 .addField(`     **${prefix}help-admins** ` ,' **اوامر اداريه** ')
