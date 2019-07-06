@@ -78,7 +78,7 @@ client.on("message", message => {
 });
 
 client.on('message', message => {
-  var prefix = "+";
+  var prefix = "#";
     if (message.author.kick) return;
     if (!message.content.startsWith(prefix)) return;
   
