@@ -475,7 +475,7 @@ client.on('message', message => {
     if (message.content.startsWith(prefix + "help-music")) {
 let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
-.addField(`     **soon** ` ,**قريبا** ')
+.addField(`     **soon** ` ,' **قريبا** ')
 .setColor('WHITE')
 message.channel.sendEmbed(embed);
 }
