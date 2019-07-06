@@ -382,6 +382,106 @@ if(message.content.startsWith(prefix + 'set-say')) {
 }
 })
 
+client.on('message', message => {
+    if (message.content.startsWith(prefix + "help")) {
+let embed = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)
+.addField(`     **${prefix}help-admins** ` ,' **اوامر اداريه** ')
+.addField(`     **${prefix}help-General** ` ,' **اوامر عامه** ')
+.addField(`     **${prefix}help-music** ` ,' **اومر ميوزك** ')
+.addField(`     **${prefix}help-ticket** ` ,' **اوامر تيكت** ')
+.addField(`     **${prefix}help-roles** ` ,' **اوامر الرتب** ')
+.addField(`     **${prefix}help-support** ` ,' **اوامر سيبورت البوت** ')
+.setColor('YELLOW')
+message.channel.sendEmbed(embed);
+}
+});
+
+client.on('message', message => {
+    if (message.content.startsWith(prefix + "help-admins")) {
+let embed = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)
+.addField(`     **${prefix}clear** ` ,' **مسح الشات** ')
+.addField(`     **${prefix}bc**  ` ,' **برودكاست** ')
+.addField(`     **${prefix}mute** ` ,' **اعطاء ميوت كتابي** ')
+.addField(`     **${prefix}unmute**  ` ,' **فك ميوت كتابي** ')
+.addField(`     **${prefix}ban** ` ,' **تبنيد الشخص** ')
+.addField(`     **${prefix}unban**  ` ,' **فك الباند** ')
+.addField(`     **${prefix}kick** ` ,' **اخراج شخص من السيرفر** ')
+.addField(`     **${prefix}closeroom**  ` ,' **لاغلاق الشات** ')
+.addField(`     **${prefix}openroom** ` ,' **لفتح الشات** ')
+.addField(`     **${prefix}dar**  ` ,' **لمسح جميع الرومات** ')
+.setColor('RED')
+message.author.sendEmbed(embed);
+.addField('☑** | تم الارسال خاص**')
+message.channel.sendEmbed(embed);
+}
+});
+
+client.on('message', message => {
+    if (message.content.startsWith(prefix + "help-general")) {
+let embed = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)
+.addField(`     **${prefix}id** ` ,' **لمعرفة الهوية** ')
+.addField(`     **${prefix}credit**  ` ,' **لمعرفة رصيد** ')
+.addField(`     **${prefix}daily** ` ,' **المكافئة اليومية** ')
+.addField(`     **${prefix}avatar**  ` ,' **لرؤيت صورت الحساب** ')
+.addField(`     **${prefix}av-ser** ` ,' **لرؤيت صورت السيرفر** ')
+.addField(`     **${prefix}profile**  ` ,' **لمعرفة معلومات الحساب** ')
+.setColor('GREEN')
+message.author.sendEmbed(embed);
+}
+});
+
+client.on('message', message => {
+    if (message.content.startsWith(prefix + "help-roles")) {
+let embed = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)
+.addField(`     **${prefix}role** ` , ' **لاعطاء رتبة** ')
+.addField(`     **${prefix}role humans**  ` ,' **لاعطاء رتبة لجميع البشريين** ')
+.addField(`     **${prefix}role bots** ` ,' **لاعطاء رتبة لجميع البوتات** ')
+.addField(`     **${prefix}role all**  ` ,' **لاعطاء رتبة للجميع** ')
+.addField(`     **${prefix}-role** ` ,' **لنزع الرتبة** ')
+.addField(`     **${prefix}-role humans**  ` ,' **لنزع الرتبة من جميع البشريين** ')
+.addField(`     **${prefix}-role bots** ` ,' **لنزع الرتبة من جميع البوتات** ')
+.addField(`     **${prefix}-role all**  ` ,' **لنزع الرتبة للجميع** ')
+.setColor('PINK')
+message.author.sendEmbed(embed);
+}
+});
+
+client.on('message', message => {
+    if (message.content.startsWith(prefix + "help-support")) {
+let embed = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)
+.addField(`     **${prefix}support** ` ,' **سيرفر الدعم الفني للبوت** ')
+.addField(`     **${prefix}own**  ` ,' **لمعرفة صاحب البوت** ')
+.addField(`     **${prefix}ping** ` ,' **لمعرفة سرعة اتصال البوت** ')
+.setColor('ORANGE')
+message.author.sendEmbed(embed);
+}
+});
+
+client.on('message', message => {
+    if (message.content.startsWith(prefix + "help-admins")) {
+let embed = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)
+.addField(`     **soon** ` ,' **قريبا** ')
+.setColor('WHITE')
+message.author.sendEmbed(embed);
+}
+});
+
+
+client.on('message', message => {
+    if (message.content.startsWith(prefix + "help-music")) {
+let embed = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)
+.addField(`     **soon** ` ,' **قريبا** ')
+.setColor('WHITE')
+message.author.sendEmbed(embed);
+}
+});
 
 
 
