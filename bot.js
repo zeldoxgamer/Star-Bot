@@ -382,10 +382,9 @@ if(message.content.startsWith(prefix + 'set-say')) {
 }
 })
 
-client.on('message', message => {
-    if (message.content.startsWith(prefix + "helps")) {
-let embed = new Discord.RichEmbed()
-.setThumbnail(message.author.avatarURL)
+if (message.content === `${prefix}help`) {
+         let embed = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)    
 .addField(`     **${prefix}help-admins** ` ,' **اوامر اداريه** ')
 .addField(`     **${prefix}help-General** ` ,' **اوامر عامه** ')
 .addField(`     **${prefix}help-music** ` ,' **اومر ميوزك** ')
@@ -397,10 +396,9 @@ message.author.sendEmbed(embed);
 }
 });
 
-client.on('message', message => {
-    if (message.content.startsWith(prefix + "help-admins")) {
-let embed = new Discord.RichEmbed()
-.setThumbnail(message.author.avatarURL)
+if (message.content === `${prefix}help-admins`) {
+         let embed = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)    
 .addField(`     **${prefix}clear** ` ,' **مسح الشات** ')
 .addField(`     **${prefix}bc**  ` ,' **برودكاست** ')
 .addField(`     **${prefix}mute** ` ,' **اعطاء ميوت كتابي** ')
@@ -416,10 +414,9 @@ message.author.sendEmbed(embed);
 }
 });
 
-client.on('message', message => {
-    if (message.content.startsWith(prefix + "help-general")) {
-let embed = new Discord.RichEmbed()
-.setThumbnail(message.author.avatarURL)
+if (message.content === `${prefix}help-general`) {
+         let embed = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)  
 .addField(`     **${prefix}id** ` ,' **لمعرفة الهوية** ')
 .addField(`     **${prefix}credit**  ` ,' **لمعرفة رصيد** ')
 .addField(`     **${prefix}daily** ` ,' **المكافئة اليومية** ')
@@ -431,10 +428,9 @@ message.author.sendEmbed(embed);
 }
 });
 
-client.on('message', message => {
-    if (message.content.startsWith(prefix + "help-roles")) {
-let embed = new Discord.RichEmbed()
-.setThumbnail(message.author.avatarURL)
+if (message.content === `${prefix}help-roles`) {
+         let embed = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)    
 .addField(`     **${prefix}role** ` , ' **لاعطاء رتبة** ')
 .addField(`     **${prefix}role humans**  ` ,' **لاعطاء رتبة لجميع البشريين** ')
 .addField(`     **${prefix}role bots** ` ,' **لاعطاء رتبة لجميع البوتات** ')
@@ -448,10 +444,9 @@ message.author.sendEmbed(embed);
 }
 });
 
-client.on('message', message => {
-    if (message.content.startsWith(prefix + "help-support")) {
-let embed = new Discord.RichEmbed()
-.setThumbnail(message.author.avatarURL)
+if (message.content === `${prefix}help-support`) {
+         let embed = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)    
 .addField(`     **${prefix}support** ` ,' **سيرفر الدعم الفني للبوت** ')
 .addField(`     **${prefix}own**  ` ,' **لمعرفة صاحب البوت** ')
 .addField(`     **${prefix}ping** ` ,' **لمعرفة سرعة اتصال البوت** ')
@@ -461,10 +456,9 @@ message.author.sendEmbed(embed);
  });
 
 
-client.on('message', message => {
-    if (message.content.startsWith(prefix + "help-ticket")) {
- let embed = new Discord.RichEmbed()
-.setThumbnail(message.author.avatarURL)
+if (message.content === `${prefix}help-ticket`) {
+         let embed = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)    
 .addField(`     **soon** ` ,' **قريبا** ')
 .setColor('WHITE')
 message.author.sendEmbed(embed);
@@ -472,10 +466,9 @@ message.author.sendEmbed(embed);
 });
 
 
-client.on('message', message => {
-    if (message.content.startsWith(prefix + "help-music")) {
-let embed = new Discord.RichEmbed()
-.setThumbnail(message.author.avatarURL)
+if (message.content === `${prefix}help-music`) {
+         let embed = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)    
 .addField(`     **soon** ` ,' **قريبا** ')
 .setColor('WHITE')
 message.author.sendEmbed(embed);
