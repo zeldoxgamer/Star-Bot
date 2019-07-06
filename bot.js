@@ -6,6 +6,29 @@
  const Canvas = require("canvas"); 
  const prefix = "#";
  const token = 'BOT_TOKEN'; 
+
+
+client.on('message',message =>{
+  var command = message.content.toLowerCase().split(" ")[0];
+    var args = message.content.toLowerCase().split(" ");
+    var userM = message.mentions.users.first()
+    if(command == prefix + 'unban') {
+        if(!message.member.hasPermission('BAN_MEMBERS')) return message.channel.send(':no_entry: | You dont have **BAN_MEMBERS** Permission!');
+        if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.channel.send(':no_entry: | I dont have **BAN_MEMBERS** Permission!');
+        if(!args[1]) return  message.channel.send(':information_source:  `#kick <@id>` يجب تحديد شخص');
+        if(args[1].length < 16) return message.reply(':no_entry: | This ID is not id user!');
+        message.guild.fetchBans().then(bans => {
+            var Found = bans.find(m => m.id === args[1]);
+            if(!Found) return message.channel.send(`:no_entry: | <@${message.author.id}> This preson not have any ban from this server! :unlock:`);
+            message.guild.unban(args[1]);
+            message.channel.send(`:white_check_mark: Successfully \`\`UNBANNED\`\` <@${args[1]}> From the server!`);
+            }
+
+        )}
+      })
+
+
+
 client.on('message', message => {
   if (message.author.x5bz) return;
   if (!message.content.startsWith(prefix)) return;
