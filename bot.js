@@ -1,9 +1,18 @@
-const Discord = require('discord.js');
-const fs = require('file-system');
-const client = new Discord.Client();
+ const Discord = require('discord.js');
 
-var prefix = '#',
+const moment = require("moment");  
 
+const fs = require("fs");      
+
+const dateFormat = require('dateformat');
+
+const client = new Discord.Client(); 
+
+const Canvas = require("canvas"); 
+
+const prefix = "#";
+
+const token = 'BOT_TOKEN'; 
 
 client.on("message", message => {
 if(message.content.startsWith(prefix + "setnick")){
@@ -49,7 +58,7 @@ client.on("message", async msg => { // message ?
  
 })
  
-let inv_room = "544475000158289920" // room id
+let inv_room = "597025240626888706" // room id
 client.on('guildMemberAdd', async member => { // membed add event
     member.guild.fetchInvites().then(async guildInvites => { // fetch invites ?
             const inv = invites[member.guild.id]; // get invite :)
