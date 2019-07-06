@@ -3,8 +3,8 @@
  const fs = require("fs");      
  const dateFormat = require('dateformat');
  const client = new Discord.Client(); 
- const Canvas = require("canvas"); 
- const canvas = require("canvas");
+ const canvas = require("canvas"); 
+ const Canvas = require("canvas");
  const prefix = "#";
  const token = 'BOT_TOKEN'; 
 
