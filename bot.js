@@ -1,18 +1,11 @@
  const Discord = require('discord.js');
-
-const moment = require("moment");  
-
-const fs = require("fs");      
-
-const dateFormat = require('dateformat');
-
-const client = new Discord.Client(); 
-
-const Canvas = require("canvas"); 
-
-const prefix = "#";
-
-const token = 'BOT_TOKEN'; 
+ const moment = require("moment");  
+ const fs = require("fs");      
+ const dateFormat = require('dateformat');
+ const client = new Discord.Client(); 
+ const Canvas = require("canvas"); 
+ const prefix = "#";
+ const token = 'BOT_TOKEN'; 
 
 client.on("message", message => {
 if(message.content.startsWith(prefix + "setnick")){
@@ -75,8 +68,7 @@ client.on('guildMemberAdd', async member => { // membed add event
     }); // end fetchs :)
 }); // end events :) ) )) ))  )) )) )) )) ) )) ))
  
- 
-const fs = require("fs")
+
 const say = JSON.parse(fs.readFileSync('./say.json', 'utf8'))
  
 client.on("message", message =>
