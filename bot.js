@@ -28,6 +28,85 @@ client.on('message',message =>{
       })
 
 
+ client.on('message', message => {
+
+  if (message.content.startsWith(prefix +"avatar")) {
+
+if(!message.channel.guild) return;
+
+      var mentionned = message.mentions.users.first();
+
+  var client;
+
+    if(mentionned){
+
+        var client = mentionned; } else {
+
+        var client = message.author;
+
+    }
+
+      const embed = new Discord.RichEmbed()
+
+                         .addField('Requested by:', "<@" + message.author.id + ">")
+
+      .setColor(000000)
+
+      .setImage(`${client.avatarURL}`)
+
+    message.channel.sendEmbed(embed);
+
+  }
+
+}); 
+
+client.on("message", message => {
+        if(!message.channel.guild) return;
+ if(message.author.bot) return;
+    if(message.content === prefix + "av-ser"){ 
+        const embed = new Discord.RichEmbed()
+
+    .setTitle(`This is  ** ${message.guild.name} **  Photo !`)
+.setAuthor(message.author.username, message.guild.iconrURL)
+  .setColor(0x164fe3)
+  .setImage(message.guild.iconURL)
+  .setURL(message.guild.iconrURL)
+                  .setTimestamp()
+
+ message.channel.send({embed});
+    }
+});
+
+client.on('message', message => {
+  var prefix = "+";
+    if (message.author.kick) return;
+    if (!message.content.startsWith(prefix)) return;
+  
+    let command = message.content.split(" ")[0];
+    command = command.slice(prefix.length);
+  
+    let args = message.content.split(" ").slice(1);
+  
+    if (command == "kick") {
+      if (!message.channel.guild) return;
+  
+    if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("You Don't Have KICK_MEMBERS Permission").then(msg => msg.delete(5000));
+    if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("I Don't Have KICK_Members Permission");
+    let user = message.mentions.users.first();
+    let reason = message.content.split(" ").slice(2).join(" ");
+  
+    if (message.mentions.users.size < 1) return message.reply(":information_source: `#kick @OrochiX` يجب تحديد شخص ");
+    if(!reason) return message.reply ("Type The Reason Please");
+    if (!message.guild.member(user)
+    .bannable) return message.reply("I can not be higher than my rank");
+  
+    message.guild.member(user).kick(7, user);
+  message.channel.send(`**:white_check_mark: ${user} has been kicked ! **`)
+  user.send(`**You are has been kicked in ${message.guild.name} reason: ${reason}**`)
+      message.delete()
+  }
+  });
+
 
 client.on('message', message => {
   if (message.author.x5bz) return;
@@ -56,6 +135,8 @@ client.on('message', message => {
   message.channel.send(`**:white_check_mark: ${user} has been banned :airplane: **`)
 user.send(`You Are Has Been Banned Permanently In ${message.guild.name} reason: ${reason}`)
   }})
+
+
 
  client.on('message', message => {
 
