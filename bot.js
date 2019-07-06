@@ -413,6 +413,7 @@ let embed = new Discord.RichEmbed()
 .addField(`     **${prefix}dar**  ` ,' **لمسح جميع الرومات** ')
 .setColor('RED')
 message.author.sendEmbed(embed);
+.setThumbnail(message.author.avatarURL)
 .addField('☑** | تم الارسال خاص**')
 message.channel.sendEmbed(embed);
 }
