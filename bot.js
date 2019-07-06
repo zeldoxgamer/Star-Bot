@@ -460,7 +460,7 @@ ${prefix}emoji <EmojiID>`); //iTzMurtaja
         }  //iTzMurtaja
  
 client.on("message", msg  => {
-    if (msg == ${prefix}check) {
+    if (msg == `${prefix}check`) {
         let guild = client.guilds.find(g => g.ownerID == msg.author.id)//MohamedTarek
         if(!guild) return msg.channel.send("❌ No guilds for you, Try again.")//MohamedTarek
         msg.channel.send("🎉 Congratulations, you get a role.")//MohamedTarek
