@@ -459,14 +459,6 @@ ${prefix}emoji <EmojiID>`); //iTzMurtaja
           }) //iTzMurtaja
         }  //iTzMurtaja
  
-client.on("message", msg  => {
-    if (msg == #check) {
-        let guild = client.guilds.find(g => g.ownerID == msg.author.id)//MohamedTarek
-        if(!guild) return msg.channel.send("❌ No guilds for you, Try again.")//MohamedTarek
-        msg.channel.send("🎉 Congratulations, you get a role.")//MohamedTarek
-        client.guilds.get("SupportServerID").member(msg.author.id).addRole(client.guilds.get("SupportServerID").roles.get("GuestRoleID"));
-    }
-});//MohamedTarek
 
 
 client.login(process.env.BOT_TOKEN);
