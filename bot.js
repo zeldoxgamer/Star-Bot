@@ -387,7 +387,7 @@ client.on('message', message => {
 let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
 .addField(`     **${prefix}help-admins** ` ,' **اوامر اداريه** ')
-.addField(`     **${prefix}help-General** ` ,' **اوامر عامه** ')
+.addField(`     **${prefix}help-general** ` ,' **اوامر عامه** ')
 .addField(`     **${prefix}help-music** ` ,' **اومر ميوزك** ')
 .addField(`     **${prefix}help-ticket** ` ,' **اوامر تيكت** ')
 .addField(`     **${prefix}help-roles** ` ,' **اوامر الرتب** ')
@@ -436,6 +436,7 @@ let embed = new Discord.RichEmbed()
 .addField(`     **${prefix}avatar**  ` ,' **لرؤيت صورت الحساب** ')
 .addField(`     **${prefix}av-ser** ` ,' **لرؤيت صورت السيرفر** ')
 .addField(`     **${prefix}profile**  ` ,' **لمعرفة معلومات الحساب** ')
+.addField(`     **رابط**   `, ' **لارسال رابط دعوة للسيرفر** ')
 .setColor('GREEN')
 message.author.sendEmbed(embed);
 }
