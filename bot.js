@@ -150,7 +150,7 @@ client.on("message", message =>
 
         }
 
-  if(message.content.startsWith(prefix + "say" ) ||
+  if(message.content.startsWith(prefix + "say" ) 
 
   message.content.startsWith(say[message.guild.id].say)) {
 
