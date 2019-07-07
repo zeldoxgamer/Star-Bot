@@ -7,9 +7,44 @@
  const prefix = "#";
  const token = 'BOT_TOKEN'; 
  const version = "1.1.2";
-       
-const fs = module.require("fs"); 
-const r1 = require('snekfetch'); 
+ const fs = module.require("fs"); 
+ const r1 = require('snekfetch'); 
+
+
+client.on('message', message => {
+    var p = message.mentions.members.first();
+    var reason = message.content.split(" ").slice(2).join(' ');
+    var log = message.guild.channels.find('name', 'log');
+    if(message.content.startsWith(`${prefix}warn`)){
+        if(!p) return message.reply(`**!منشن الشخص**`);
+        if(!reason) return message.reply(`**!اكتب رقم السبب**`);
+        if(!p.bannable) return message.reply(`**I can't ban a staff member!**`);
+        reason = reason.replace('0', "**نشر في الخاص**");
+        reason = reason.replace('1', "**اسم غير لائق**");
+        reason = reason.replace('2', "**صوره غير لائقه**");
+        reason = reason.replace('3', "**سب الاهل**");
+        reason = reason.replace('4', "**سب الذات الاهيه**");
+        reason = reason.replace('5', "**مخالفه القوانين مع اخذ اكثر من تحذير**");
+        reason = reason.replace('6', "**سبام في الشات**");
+        reason = reason.replace('7', "**استخدام بعض الاوامر بشكل مسبب للإضرار بالسيرفر**");
+        reason = reason.replace('8', "**جلب اعضاء مفبركين للسيرفر**");
+        reason = reason.replace('9', "**عنصريه**");
+        var embed = new Discord.RichEmbed()
+        .setAuthor(`User Warned!`)
+        .addField(`Name ♣`, `<@${p.id}>`)
+        .addField(`By ♣`, `<@${message.author.id}>`)
+        .addField(`Reason ♣`, reason)
+        .setTimestamp()
+        .setColor("WHITE")
+        .setFooter(` `)
+        message.channel.send(`${p} ${reason}`)
+            message.delete();
+        log.send({embed});
+    }
+});
+
+
+
 
 
 //var يعني تختصر للحاجه زي منا عامل كدة
@@ -683,182 +718,12 @@ user.send(`تم اعطائك باند في ${message.guild.name} السبب: ${r
 
 
 
-const ms = require("ms");
-let warns = JSON.parse(fs.readFileSync("./warnings.json"));;
 
- 
 
- 
+  
+  
 
-client.on('message', async message => {
-
- 
-
-  if (message.author.x5bz) return;
-
-  if (!message.content.startsWith(prefix)) return;
-
- 
-
- 
-
-  let command = message.content.split(" ")[0];
-
-  command = command.slice(prefix.length);
-
- 
-
-  let args = message.content.split(" ").slice(1);
-
- 
-
-  if (command == "warn") { //??? ???????
-
- 
-
-               if(!message.channel.guild) return message.reply('** This command only for servers**');
-
-         
-
-  if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply("**You Don't Have ` BAN_MEMBERS ` Permission**");
-
-  let user = message.mentions.users.first();
-
-  let reason = message.content.split(" ").slice(2).join(" ");
-
- 
-
-  if (message.mentions.users.size < 1) return message.reply("**???? ???**");
-
-  if(!reason) return message.reply ("**???? ??? ?????**");
-
- 
-
- 
-
-  if(!warns[user.id]) warns[user.id] = {
-
-    warns: 0
-
-  };
-
- 
-
-  warns[user.id].warns++;
-
- 
-
-  fs.writeFile("./warnings.json", JSON.stringify(warns), (err) => {
-
-    if (err) console.log(err)
-
-  });
-
- 
-
- 
-
-  const banembed = new Discord.RichEmbed()
-
-  .setAuthor(`WARNED!`, user.displayAvatarURL)
-
-  .setColor("RANDOM")
-
-  .setTimestamp()
-
-  .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
-
-  .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
-
-  .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
-
-   client.channels.find('name', 'log').send({
-
-    embed : banembed
-
-  })
-
- 
-
-    if(warns[user.id].warns == 2){ //??? ???????? ??????
-
-    let muterole = message.guild.roles.find(`name`, "Muted");
-
-    if(!muterole){
-
-      try{
-
-        muterole = await message.guild.createRole({
-
-          name: "Muted",
-
-          color: "#000000",
-
-          permissions:[]
-
-        })
-
-        message.guild.channels.forEach(async (channel, id) => {
-
-          await channel.overwritePermissions(muterole, {
-
-            SEND_MESSAGES: false,
-
-            ADD_REACTIONS: false
-
-          });
-
-        });
-
-      }catch(e){
-
-        console.log(e.stack);
-
-      }
-
-    }
-
-   
-
-    let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-
-    if(!tomute) return message.reply("**??? ???? ?????? ?????**:x: ") .then(m => m.delete(5000));
-
-   
-
-    let mutetime = "60s";
-
-    await(tomute.addRole(muterole.id));
-
-    message.channel.send(`<@${user.id}> has been temporarily muted`);
-
- 
-
-    setTimeout(async function(){
-
-    await(tomute.removeRole(muterole.id));
-
-      message.reply(`<@${user.id}> has been unmuted.`)
-
-    }, ms(mutetime))
-
-  }
-
-  if(warns[user.id].warns == 3){  //??? ???????? ??????
-
-    message.guild.member(user).ban(reason);
-
-    message.reply(`<@${user.id}> has been banned.`)
-
-  }
-
- 
-
-}
-
-}
-
-);
+ 
 
 
 
