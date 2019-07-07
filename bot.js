@@ -8,7 +8,10 @@
  const token = 'BOT_TOKEN'; 
  const version = "1.1.2";
        
-        if (message.content.startsWith("*new")) {     /// Me Codes 
+
+
+client.on('message', message => {
+        if (message.content.startsWith(`${prefix}new`)) {     /// Me Codes 
         const reason = message.content.split(" ").slice(1).join(" ");     /// Me Codes
         if (!message.guild.roles.exists("name", "Support Team")) return message.channel.send(`يجب انشاء رتبة بإٍسم : \`Support Team\` وتعطيها للبوت لكي يستطيع التعديل والانشاء `);
         if (message.guild.channels.exists("name", "ticket-{message.author.id}" + message.author.id)) return message.channel.send(`You already have a ticket open.`);    /// Me Codes
