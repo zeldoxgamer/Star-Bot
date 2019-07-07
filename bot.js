@@ -7,8 +7,11 @@
  const prefix = "#";
  const token = 'BOT_TOKEN'; 
  const version = "1.1.2",
+       
+       
+       
+       
  client.on('ready', () => {
-ᵥᵣ
      client.user.setActivity(`${prefix}help | ᵥᵣ ${version}`,{type: 'Streaming'});
 
 }); 
