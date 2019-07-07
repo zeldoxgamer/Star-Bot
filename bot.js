@@ -71,7 +71,7 @@ if (message.content.startsWith(`${prefix}profile`)) { // الامر
    
                       //  ava.src = buf;
 
-    fs.readFile(__dirname + '/images_profile/profile.png', function(err, picture) { //مكان الصوره 
+    fs.readFileSync(__dirname + '/images_profile/profile.png', function(err, picture) { //مكان الصوره 
       if (err) throw err
       var img = new Image
         		var url = message.author.avatarURL; //افتار صورتك
@@ -119,7 +119,7 @@ if (message.content.startsWith(`${prefix}profile`)) { // الامر
     
 
     setTimeout(function() {
-      fs.readFile(__dirname + '/images_profile/diamond_prof_bg.png', function(err, picture) {
+      fs.readFileSync(__dirname + '/images_profile/diamond_prof_bg.png', function(err, picture) {
         if (err) throw err
         var img = new Image
         img.onload = () => {
