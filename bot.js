@@ -10,7 +10,7 @@
        
        
      client.on('ready', () => {
-     client.user.setActivity(`${prefix}help | ${version}inv`,{type: 'Streaming'});
+     client.user.setActivity(`${prefix}help | vr: ${version}`,{type: 'Streaming'});
 
 });  
        
