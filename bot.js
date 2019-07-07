@@ -11,10 +11,7 @@
        
        
        
- client.on('ready', () => {
-     client.user.setActivity(`${prefix}help | ᵥᵣ ${version}`,{type: 'Streaming'});
-
-}); 
+ 
 
 
 client.on("message", (message) => {
