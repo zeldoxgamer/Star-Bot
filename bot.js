@@ -39,7 +39,7 @@ message.guild.createChannel(name, `text`).then(c => {
                 SEND_MESSAGES: true,
                 READ_MESSAGES: true
             });
-        message.channel.send(`:white_check_mark: تم انشاء تذكرتك, #${name} .`);
+        message.channel.send(`:white_check_mark: تم انشاء تذكرتك, <#${c.id}>.`);
             const embed = new Discord.RichEmbed()
                 .setColor(0xCF40FA)
                .addField(`Hey ${message.author.username}!`, `**تم فتح تذكرة الرجاء انتظار الى حين يأتي مشرف ويقوم بلرد عليك**`)
