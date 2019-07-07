@@ -54,7 +54,7 @@ message.guild.createChannel(name, `text`).then(c => {
      if(message.author.bot) return;
        if(!message.channel.name.startsWith("ticket-")) return message.channel.send(`this command only for the tickets`)
  let close = new Discord.RichEmbed()
- .addField(`**اكتب \`${prefix}close\` مجددا للتأكيد**`, `** **`)
+ .addField(`**اكتب close{prefix} مجددا للتأكيد**`, `** **`)
  .setColor("#36393e");
  message.channel.sendEmbed(close) .then(m => {
  const filter = msg => msg.content.startsWith(prefix + 'close');
@@ -106,10 +106,10 @@ if(log) return log.send(rr)
   if(!message.guild.member(client.user).hasPermission("MANAGE_CHANNELS")) return message.channel.send(`**Error** :octagonal_sign:\nI Don\'t have MANAGE_CHANNELS Permission to do this`)
  if(!message.channel.name.startsWith("ticket-")) return message.channel.send(`this command only for the tickets`);
 let member = message.mentions.members.first();
-if(!member) return message.channel.send(`**Please mention the user :x:**`);
+if(!member) return message.channel.send(`**المرجوا منشن الشخص :x:**`);
 if(message.channel.permissionsFor(member).has(['SEND_MESSAGES', 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY'])) return message.channel.send(`this member already in this ticket :rolling_eyes:`);
 message.channel.overwritePermissions(member.id, { SEND_MESSAGES: true, VIEW_CHANNEL: true, READ_MESSAGE_HISTORY: true });
-message.channel.send(`**Done :white_check_mark:\nSuccessfully added <@${member.user.id}> to the ticket**`)
+message.channel.send(`**Done :white_check_mark:\nتم اضافته <@${member.user.id}> to the ticket**`)
 let tgt = new Discord.RichEmbed()
 .setColor(`GREEN`)
 .setAuthor(`تم اضافته الى التدكرة`)
@@ -132,7 +132,7 @@ if(log) return log.send(tgt);
      return message.channel.send(`:x: **${member.user.tag}** is not in this ticket to remove them`);
  }
  message.channel.overwritePermissions(member.id, { SEND_MESSAGES: false, VIEW_CHANNEL: false, READ_MESSAGE_HISTORY: false });
- message.channel.send(`**Done :white_check_mark:\nSuccessfully removed \`${member.user.tag}\` from the ticket**`)
+ message.channel.send(`**Done :white_check_mark:\nتم استبعاده \`${member.user.tag}\` from the ticket**`)
  let gtg = new Discord.RichEmbed()
 .setColor(`BLUE`)
 .setAuthor(`تم استبعاده من التدكرة`)
@@ -1163,8 +1163,13 @@ client.on('message', message => {
     if (message.content.startsWith(prefix + "h-ticket")) {
 let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
-.addField(`     **soon** ` ,' **قريبا** ')
-.setColor('WHITE')
+.addField(`     **${prefix}new** ` ,' **لانشاء تدكرة** ')
+.addField(`     **${prefix}close** ` ,' **لانشاء تدكرة** ')
+.addField(`     **${prefix}closse-all** ` ,' **لانشاء تدكرة** ')
+.addField(`     **${prefix}add** ` ,' **لانشاء تدكرة** ')
+.addField(`     **${prefix}remove** ` ,' **لانشاء تدكرة** ')
+.addField(`     **Log سوي روم باسم** ` ,' **** ')
+.setColor('BLUE')
 message.author.sendEmbed(embed);
 }
 });
