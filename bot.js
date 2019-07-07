@@ -56,15 +56,6 @@ var po = "النقاط"
 var lev = "الفل"
 
 
-bot.on("ready", async () => { // كل حاجه هتتفح لما البوت يشتغل
-
-    console.log(`I'm Online \n By ${copy}`) // الي هيظهر في الكونسل
-    console.log(`Logged in as ${bot.user.tag}!`); // نفس الي فوق
-
-    bot.user.setGame(`${bot.users.size} users `,"http://twitch.tv/") 
-    bot.user.setStatus("online")
-
-}); // نهايه الكود
 
 
 
