@@ -86,10 +86,7 @@ client.on('message', message => {
 
 
 const ms = require("ms");
-
 let warns = JSON.parse(fs.readFileSync("./warnings.json"));;
-
-const client = new Discord.Client();
 
  
 
