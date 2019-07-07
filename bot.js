@@ -15,12 +15,16 @@ client.on('message', message => {
         const reason = message.content.split(" ").slice(1).join(" ");     /// Me Codes
         if (!message.guild.roles.exists("name", "Support Team")) return message.channel.send(`يجب انشاء رتبة بإٍسم : \`Support Team\` وتعطيها للبوت لكي يستطيع التعديل والانشاء `);
         if (message.guild.channels.exists("name", "ticket-{message.author.id}" + message.author.id)) return message.channel.send(`You already have a ticket open.`);    /// Me Codes
-         var current;
-         current++;
-var name = `ticket-${current}`;
-message.guild.createChannel(name, `ticket-${current}`).then(c => {
-         current =1 ;
+     
 
+	
+	
+	var current = message.guild.channels.filter(c => c.name.startsWith("ticket-")).size;
+         current++;
+         var name = `ticket-${current}`;
+message.guild.createChannel(name, `text`).then(c => {
+         current =1 ;
+	
             let role = message.guild.roles.find("name", "Support Team");
             let role2 = message.guild.roles.find("name", "@everyone");
             c.overwritePermissions(role, {
