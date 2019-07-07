@@ -6,10 +6,13 @@
  const Canvas = require("canvas"); 
  const prefix = "#";
  const token = 'BOT_TOKEN'; 
- const version = "1.1.2",
+ const version = "1.1.2";
        
        
-       
+     client.on('ready', () => {
+     client.user.setActivity(`${prefix}help | ${version}inv`,{type: 'Streaming'});
+
+});  
        
  
 
