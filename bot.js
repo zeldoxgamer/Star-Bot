@@ -7,7 +7,6 @@
  const prefix = "#";
  const token = 'BOT_TOKEN'; 
  const version = "1.1.2";
- const fs = module.require("fs"); 
  const r1 = require('snekfetch'); 
 
 
