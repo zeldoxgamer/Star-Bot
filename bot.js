@@ -29,6 +29,9 @@ if (message.content.startsWith(prefix + 'clear')) { //Codes
   }
   });
 
+
+
+client.on('message', message => {
     if(message.content.startsWith(prefix +"server")){ // الامر
       if(!message.guild.member(message.author).hasPermission("ADMINISTRATOR")) return message.reply(`**هذه الخاصية للادارة فقط** ❎ `)
     if(!message.channel.guild) return message.reply(' ');
