@@ -8,8 +8,8 @@
  const token = 'BOT_TOKEN'; 
  const version = "1.1.2",
  client.on('ready', () => {
-
-     client.user.setActivity(`${prefix}help | vr: ${version}`,{type: 'Streaming'});
+ᵥᵣ
+     client.user.setActivity(`${prefix}help | ᵥᵣ ${version}`,{type: 'Streaming'});
 
 }); 
 
