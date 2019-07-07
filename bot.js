@@ -8,7 +8,43 @@
  const token = 'BOT_TOKEN'; 
  const version = "1.1.2";
        
-       
+        if (message.content.startsWith("*new")) {     /// Me Codes 
+        const reason = message.content.split(" ").slice(1).join(" ");     /// Me Codes
+        if (!message.guild.roles.exists("name", "Support Team")) return message.channel.send(`يجب انشاء رتبة بإٍسم : \`Support Team\` وتعطيها للبوت لكي يستطيع التعديل والانشاء `);
+        if (message.guild.channels.exists("name", "ticket-{message.author.id}" + message.author.id)) return message.channel.send(`You already have a ticket open.`);    /// Me Codes
+         var current;
+         current++;
+var name = `ticket-${current}`;
+message.guild.createChannel(name, "text").then(c => {
+         current =1 ;
+
+            let role = message.guild.roles.find("name", "Support Team");
+            let role2 = message.guild.roles.find("name", "@everyone");
+            c.overwritePermissions(role, {
+                SEND_MESSAGES: true,
+                READ_MESSAGES: true
+            });    /// ALPHA CODES
+            c.overwritePermissions(role2, {
+                SEND_MESSAGES: false,
+                READ_MESSAGES: false
+            });
+            c.overwritePermissions(message.author, {
+                SEND_MESSAGES: true,
+                READ_MESSAGES: true
+            });
+        message.channel.send(`:white_check_mark: تم انشاء تذكرتك, #${c.id}.`);
+            const embed = new Discord.RichEmbed()
+                .setColor(0xCF40FA)
+               .addField(`Hey ${message.author.username}!`, `**تم فتح تذكرة الرجاء انتظار الى حين يأتي مشرف ويقوم بلرد عليك**`)
+                .setTimestamp();
+            c.send({
+                embed: embed
+            });
+        }).catch(console.error);
+    }
+
+
+
      client.on('ready', () => {
      client.user.setActivity(`${prefix}help | vr: ${version}`,{type: 'Streaming'});
 
@@ -930,7 +966,7 @@ let embed = new Discord.RichEmbed()
 .addField(`     **${prefix}dar**  ` ,' **لمسح جميع الرولات** ')
 .addField(`     **${prefix}dac** ` , ' **لمسح كل الرومات** ')
 .addField(`     **${prefix}server** ` , ' **لمعرفة معلومات عن السيرفر** ')
-.addField(`     **${prefix}roles** ` , ' ** لاظهار قائمة رتب السيرفر** ')
+.addField(`     **${prefix}liste-roles** ` , ' ** لاظهار قائمة رتب السيرفر** ')
 .setColor('RED')
 message.author.sendEmbed(embed);
 }
