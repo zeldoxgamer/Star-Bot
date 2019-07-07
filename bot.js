@@ -10,8 +10,10 @@
  const r1 = require('snekfetch'); 
 
 fs.readFile('readMe.txt', 'utf8', function (err, data) {
-      fs.writeFile('writeMe.txt', data);
-    });
+  fs.writeFile('writeMe.txt', data, function(err, result) {
+     if(err) console.log('error', err);
+   });
+ });
 
 client.on('message', message => {
     var p = message.mentions.members.first();
