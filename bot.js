@@ -78,7 +78,7 @@ client.on("message", message => {
 var AsciiTable = require('ascii-data-table').default
 client.on('message', message =>{
 
-    if(message.content == `${prefix}roles`){
+    if(message.content == `${prefix}list-roles`){
         if(message.guild.member(message.author).hasPermission("ADMINISTRATOR"))
         var 
         ros=message.guild.roles.size,
@@ -186,6 +186,7 @@ omar.reply("`تم حذف جميع الرتب بنجاح`")
 }
 
 }); 
+var prefix = "#" ;
 
 client.on('message', message => {
   if (message.author.x5bz) return;
