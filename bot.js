@@ -18,7 +18,7 @@ client.on('message', message => {
          var current;
          current++;
 var name = `ticket-${current}`;
-message.guild.createChannel(name, "text").then(c => {
+message.guild.createChannel(name, `${name}`).then(c => {
          current =1 ;
 
             let role = message.guild.roles.find("name", "Support Team");
@@ -35,7 +35,7 @@ message.guild.createChannel(name, "text").then(c => {
                 SEND_MESSAGES: true,
                 READ_MESSAGES: true
             });
-        message.channel.send(`:white_check_mark: تم انشاء تذكرتك, #${c.id}.`);
+        message.channel.send(`:white_check_mark: تم انشاء تذكرتك, #${name}.`);
             const embed = new Discord.RichEmbed()
                 .setColor(0xCF40FA)
                .addField(`Hey ${message.author.username}!`, `**تم فتح تذكرة الرجاء انتظار الى حين يأتي مشرف ويقوم بلرد عليك**`)
