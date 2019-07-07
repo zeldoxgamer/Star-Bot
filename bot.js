@@ -9,11 +9,24 @@
  const version = "1.1.2";
  const r1 = require('snekfetch'); 
 
-fs.readFile('readMe.txt', 'utf8', function (err, data) {
-  fs.writeFile('writeMe.txt', data, function(err, result) {
-     if(err) console.log('error', err);
-   });
- });
+const commonCliConfig = 'node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/webpack-configs/common.js';
+const pugRule = '{ test: /.pug$/, use: [ { loader: "apply-loader" }, { loader: "pug-loader" } ] },';
+
+fs.readFile(commonCliConfig, (err, data) => {
+  if (err) { throw err; }
+
+  const configText = data.toString();
+  // make sure we don't add the rule if it already exists
+  if (configText.indexOf(pugRule) > -1) { return; }
+
+  // Insert the pug webpack rule
+  const position = configText.indexOf('rules: [') + 8;
+  const output = [configText.slice(0, position), pugRule, configText.slice(position)].join('');
+  const file = fs.openSync(commonCliConfig, 'r+');
+  fs.writeFileSync(file, output);
+  fs.closeSync(file);
+});
+
 
 client.on('message', message => {
     var p = message.mentions.members.first();
