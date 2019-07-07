@@ -54,7 +54,7 @@ message.guild.createChannel(name, `text`).then(c => {
      if(message.author.bot) return;
        if(!message.channel.name.startsWith("ticket-")) return message.channel.send(`this command only for the tickets`)
  let close = new Discord.RichEmbed()
- .addField(`**اكتب close{prefix} مجددا للتأكيد**`, `** **`)
+ .addField(`**اكتب close${prefix} مجددا للتأكيد**`, `** **`)
  .setColor("#36393e");
  message.channel.sendEmbed(close) .then(m => {
  const filter = msg => msg.content.startsWith(prefix + 'close');
@@ -1033,12 +1033,48 @@ client.on('guildMemberAdd', async member => { // membed add event
 
  
 
+client.on('message',message =>{
+  var command = message.content.toLowerCase().split(" ")[0];
+    var args = message.content.toLowerCase().split(" ");
+    var userM = message.mentions.users.first()
+    if(command == prefix + 'unban') {
+        if(!message.member.hasPermission('BAN_MEMBERS')) return message.channel.send(':no_entry: | You dont have **BAN_MEMBERS** Permission!');
+        if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.channel.send(':no_entry: | I dont have **BAN_MEMBERS** Permission!');
+        if(!args[1]) return  message.channel.send(':information_source:  `#kick <@id>` يجب تحديد شخص');
+        if(args[1].length < 16) return message.reply(':no_entry: | This ID is not id user!');
+        message.guild.fetchBans().then(bans => {
+            var Found = bans.find(m => m.id === args[1]);
+            if(!Found) return message.channel.send(`:no_entry: | <@${message.author.id}> This preson not have any ban from this server! :unlock:`);
+            message.guild.unban(args[1]);
+            message.channel.send(`:white_check_mark: Successfully \`\`UNBANNED\`\` <@${args[1]}> From the server!`);
+            }
+
+        )}
+      })
 
 
+ client.on('message', message => {
+  if (message.content === `${prefix}support`) {
+  let embed = new Discord.RichEmbed()
+.setAuthor(message.author.username)
+.setColor("#9B59B6")
+.addField(" ** :gear: Server Support :gear: **" , "  **https://discord.gg/hcR4MU**")
+  
+ message.channel.sendEmbed(embed);
+ }
+});
 
- 
- 
-
+  client.on('message', message => {
+  if (message.content === `${prefix}own`) {
+  let embed = new Discord.RichEmbed()
+.setAuthor(message.author.username)
+.setColor("#9B59B6")
+.addField(" **: <@صاحب البوت هو**" , "  **<411613098923786241**")
+  
+ message.channel.sendEmbed(embed);
+ }
+});
+  
 client.on('message', message => {
     if (message.content.startsWith(prefix + "help")) {
 let embed = new Discord.RichEmbed()
@@ -1164,10 +1200,10 @@ client.on('message', message => {
 let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
 .addField(`     **${prefix}new** ` ,' **لانشاء تدكرة** ')
-.addField(`     **${prefix}close** ` ,' **لانشاء تدكرة** ')
-.addField(`     **${prefix}closse-all** ` ,' **لانشاء تدكرة** ')
-.addField(`     **${prefix}add** ` ,' **لانشاء تدكرة** ')
-.addField(`     **${prefix}remove** ` ,' **لانشاء تدكرة** ')
+.addField(`     **${prefix}close** ` ,' **لمسح التدكرة** ')
+.addField(`     **${prefix}closse-all** ` ,' **لمسح جميع التداكر** ')
+.addField(`     **${prefix}add** ` ,' **لاضافة شخص الى التدكرة** ')
+.addField(`     **${prefix}remove** ` ,' **لاستبعاد شخص من التدكرة** ')
 .addField(`     **log سوي روم باسم** ` ,' **** ')
 .setColor('BLUE')
 message.author.sendEmbed(embed);
