@@ -186,7 +186,7 @@ omar.reply("`تم حذف جميع الرتب بنجاح`")
 }
 
 }); 
-var prefix = "#" ;
+
 
 client.on('message', message => {
   if (message.author.x5bz) return;
@@ -206,10 +206,10 @@ client.on('message', message => {
   let reason = message.content.split(" ").slice(2).join(" ");
   /*let b5bzlog = client.channels.find("name", "5bz-log");
   if(!b5bzlog) return message.reply("I've detected that this server doesn't have a 5bz-log text channel.");*/
-  if (message.mentions.users.size < 1) return message.reply("**Mention Someone**");
+  if (message.mentions.users.size < 1) return message.reply("**منشن احد**");
   if(!reason) return;
   if (!message.guild.member(user)
-  .bannable) return message.reply("**This person has a grade higher than his bot rank**");
+  .bannable) return message.reply("**لا يمكن اعطاء باند للادارة**");
 
   message.guild.member(user).ban(7, user);
   message.channel.send(`**:white_check_mark: ${user} تم اعطائه باند :airplane: **`)
