@@ -86,7 +86,7 @@ if(log) log.send(closee)
  })
  })
  })    
-   } if(message.content.startsWith(prefix + `all-close`)) {
+   } if(message.content.startsWith(prefix + `close-all`)) {
      if(!message.guild.member(client.user).hasPermission("MANAGE_CHANNELS")) return message.channel.send(`**Error** :octagonal_sign:\nI Don\'t have MANAGE_CHANNELS Permission`)
      if(!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply('You don\'t have Permission **MANAGE_CHANNELS** to close all tickets');
       message.guild.channels.filter(c => c.name.toLowerCase().startsWith("ticket-")).forEach(channel => { channel.delete(); })
