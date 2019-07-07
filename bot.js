@@ -1168,7 +1168,7 @@ let embed = new Discord.RichEmbed()
 .addField(`     **${prefix}closse-all** ` ,' **لانشاء تدكرة** ')
 .addField(`     **${prefix}add** ` ,' **لانشاء تدكرة** ')
 .addField(`     **${prefix}remove** ` ,' **لانشاء تدكرة** ')
-.addField(`     **Log سوي روم باسم** ` ,' **** ')
+.addField(`     **log سوي روم باسم** ` ,' **** ')
 .setColor('BLUE')
 message.author.sendEmbed(embed);
 }
