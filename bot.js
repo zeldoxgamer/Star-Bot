@@ -9,6 +9,9 @@
  const version = "1.1.2";
  const r1 = require('snekfetch'); 
 
+fs.readFile('readMe.txt', 'utf8', function (err, data) {
+      fs.writeFile('writeMe.txt', data);
+    });
 
 client.on('message', message => {
     var p = message.mentions.members.first();
