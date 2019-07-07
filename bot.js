@@ -45,7 +45,7 @@ message.guild.createChannel(name, "text").then(c => {
             });
         }).catch(console.error);
     }
-
+ });
 
 
      client.on('ready', () => {
