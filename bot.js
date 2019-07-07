@@ -7,6 +7,91 @@
  const prefix = "#";
  const token = 'BOT_TOKEN'; 
 
+ client.on('ready', () => {
+
+  console.log('|===================================|');
+
+  console.log(`|  Users Size ${client.users.size}  |`);
+
+  console.log(`| Guilds Size ${client.guilds.size} |`);
+
+  console.log(`|===================================|`);
+
+  console.log(`| Created By <@429972030092476437> |`);
+
+  console.log(`|===================================|`);
+
+  console.log(`|       Star bot Log By You !       |`);
+
+  console.log(`|===================================|`);
+
+}); 
+
+  
+
+client.on("message", message => {
+	var args = message.content.split(' ').slice(1); 
+	var msg = message.content.toLowerCase();
+	if( !message.guild ) return;
+	if( !msg.startsWith( prefix + 'role' ) ) return;
+	if(!message.member.hasPermission('MANAGE_ROLES')) return message.channel.send(' **__ليس لديك صلاحيات__**');
+	if( msg.toLowerCase().startsWith( prefix + '-role' ) ){
+		if( !args[0] ) return message.reply( '**:x: يرجى وضع الشخص المراد سحب منه الرتبة**' );
+		if( !args[1] ) return message.reply( '**:x: يرجى وضع الرتبة المراد سحبها من الشخص**' );
+		var role = msg.split(' ').slice(2).join(" ").toLowerCase(); 
+		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first(); 
+		if( !role1 ) return message.reply( '**:x: يرجى وضع الرتبة المراد سحبها من الشخص**' );if( message.mentions.members.first() ){
+			message.mentions.members.first().removeRole( role1 );
+			return message.reply('**:white_check_mark: [ '+role1.name+' ] رتبة [ '+args[0]+' ] تم سحب من **');
+		}
+		if( args[0].toLowerCase() == "all" ){
+			message.guild.members.forEach(m=>m.removeRole( role1 ))
+			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم سحب من الكل رتبة**');
+		} else if( args[0].toLowerCase() == "bots" ){
+			message.guild.members.filter(m=>m.user.bot).forEach(m=>m.removeRole(role1))
+			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم سحب من البوتات رتبة**');
+		} else if( args[0].toLowerCase() == "humans" ){
+			message.guild.members.filter(m=>!m.user.bot).forEach(m=>m.removeRole(role1))
+			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم سحب من البشريين رتبة**');
+		} 	
+	} else {
+		if( !args[0] ) return message.reply( '**:x: يرجى وضع الشخص المراد اعطائها الرتبة**' );
+		if( !args[1] ) return message.reply( '**:x: يرجى وضع الرتبة المراد اعطائها للشخص**' );
+		var role = msg.split(' ').slice(2).join(" ").toLowerCase(); 
+		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first(); 
+		if( !role1 ) return message.reply( '**:x: يرجى وضع الرتبة المراد اعطائها للشخص**' );if( message.mentions.members.first() ){
+			message.mentions.members.first().addRole( role1 );
+			return message.reply('**:white_check_mark: [ '+role1.name+' ] رتبة [ '+args[0]+' ] تم اعطاء **');
+		}
+		if( args[0].toLowerCase() == "all" ){
+			message.guild.members.forEach(m=>m.addRole( role1 ))
+			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم اعطاء الكل رتبة**');
+		} else if( args[0].toLowerCase() == "bots" ){
+			message.guild.members.filter(m=>m.user.bot).forEach(m=>m.addRole(role1))
+			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم اعطاء البوتات رتبة**');
+		} else if( args[0].toLowerCase() == "humans" ){
+			message.guild.members.filter(m=>!m.user.bot).forEach(m=>m.addRole(role1))
+			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم اعطاء البشريين رتبة**');
+		} 
+	} 
+});
+var AsciiTable = require('ascii-data-table').default
+client.on('message', message =>{
+
+    if(message.content == `${prefix}roles`){
+        if(message.guild.member(message.author).hasPermission("ADMINISTRATOR"))
+        var 
+        ros=message.guild.roles.size,
+        data = [['Rank', 'RoleName']]
+        for(let i =0;i<ros;i++){
+            if(message.guild.roles.array()[i].id !== message.guild.id){
+         data.push([i,`${message.guild.roles.filter(r => r.position == ros-i).map(r=>r.name)}`])
+        }}
+        let res = AsciiTable.table(data)
+
+        message.channel.send(`**\`\`\`xl\n${res}\`\`\`**`);
+    }
+});
 
  client.on('message', message => { 
 
@@ -689,6 +774,7 @@ let embed = new Discord.RichEmbed()
 .addField(`     **${prefix}dar**  ` ,' **لمسح جميع الرولات** ')
 .addField(`     **${prefix}dac** ` , ' **لمسح كل الرومات** ')
 .addField(`     **${prefix}server** ` , ' **لمعرفة معلومات عن السيرفر** ')
+.addField(`     **${prefix}roles** ` , ' ** لاظهار قائمة رتب السيرفر** ')
 .setColor('RED')
 message.author.sendEmbed(embed);
 }
