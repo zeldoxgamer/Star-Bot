@@ -9,7 +9,26 @@
  const token = 'BOT_TOKEN'; 
  const version = "1.1.2";
  const r1 = require('node-fetch'); 
+const antihack = JSON.parse(fs.readFileSync('./antihack.json' , 'utf8'));
+const antijoin = JSON.parse(fs.readFileSync('./antijoin.json' , 'utf8'));
+let antibots = JSON.parse(fs.readFileSync('./antibots.json' , 'utf8'));
 
+
+
+
+
+
+client.on('message', message =>{
+  if(message.content.startsWith(prefix + 'emoji-add')) {
+    let args = message.content.split(" ").slice(1).join(" ");
+    if(!args) return message.channel.send('**الاموجي `id` المرجوا كتابة **')
+    if(args.length < "18" || args.length > "18" || isNaN(args)) return message.channel.send(`**هدا الاموجي غير موجود❌**`)
+    message.guild.createEmoji(`https://cdn.discordapp.com/emojis/${args}.png`, `${args}`).catch(mstry => {
+     return message.channel.send(`**هدا الاموجي غير موجود❌**`)
+    })
+    message.channel.send(`**تم اضافة الاموجي بنجاح✅**`)
+  }
+});
 
 
 
@@ -101,7 +120,7 @@ if(message.content.startsWith(prefix + `autorole`)) {
     ar[message.guild.id].role = newRole
      message.channel.send(`**The AutoRole Has Been Changed to ${newRole}.**`)
    }
-         }
+         
   }
  
 if(message.content === prefix + 'info') {
@@ -1985,6 +2004,205 @@ client.on('voiceStateUpdate', (voiceOld, voiceNew) => {
         logChannel.send(voiceLeave);
     }
 });
+
+
+
+
+        client.on('message', message => {
+    if(message.content.startsWith(prefix + "antihack on")) {
+        if(!message.channel.guild) return message.reply('**This Command Only For Servers**');
+        if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send('**Sorry But You Dont Have Permission** `MANAGE_GUILD`' );
+antihack[message.guild.id] = {
+onoff: 'On',
+}
+message.channel.send(`**✅ The AntiHack Is __𝐎𝐍__ !**`)
+          fs.writeFile("./antihack.json", JSON.stringify(antihack), (err) => {
+            if (err) return console.error(err)
+            .catch(err => {
+              console.error(err);
+          });
+            });
+          }
+
+        })
+        //antihack with ON , OFF ! RARE CODE 
+        //LIKE PLUSBOT !
+
+
+client.on('message', message => {
+	let data
+    if(message.content.startsWith(prefix + "antihack off")) {
+        if(!message.channel.guild) return message.reply('**This Command Only For Servers**');
+        if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send('**Sorry But You Dont Have Permission** `MANAGE_GUILD`' );
+antihack[message.guild.id] = {
+onoff: 'Off',
+}
+message.channel.send(`**⛔ The AntiHack Is __𝐎𝐅𝐅__ !**`)
+          fs.writeFile("./antihack.json", JSON.stringify(antihack), (err) => {
+            if (err) return console.error(err)
+            .catch(err => {
+              console.error(err);
+          });
+            });
+          }
+
+        })
+  let banse = new Set();
+  let bane = JSON.parse(fs.readFileSync('./data1.json' , 'utf8'));//require data1.json
+  client.on('guildBanAdd', function(xd) {
+      if(!antihack[xd.xd.id]) antihack[xd.xd.id] = {
+        onoff: 'Off'
+      }
+    xd.fetchAuditLogs().then(logs => {
+      const ser = logs.entries.first().executor;
+      if(!bane[ser.id+xd.id]) bane[ser.id+xd.id] = {
+        bans: 2
+      }
+      if(antihack[xd.xd.id].onoff === 'Off') return;
+      let boner = bane[ser.id+xd.id]
+  banse.add(ser.id)
+  boner.bans = Math.floor(boner.bans+1)
+  
+  
+  setTimeout(() => {
+    boner.bans = 2
+    banse.delete(ser.id)
+  },8000)
+  
+  if(boner.bans > 2) {
+    let roles = xd.members.get(ser.id).roles.array()
+  xd.members.get(ser.id).removeRoles(roles)
+  }
+  
+      })
+      fs.writeFile('./data1.json', JSON.stringify(bane), (err) => {
+  if (err) console.error(err);
+  })
+  
+  })
+let data = JSON.parse(fs.readFileSync("./data.json", "utf8"))
+  client.on('guildMemberRemove', (u) => {
+      if(!antihack[u.guild.id]) antihack[u.guild.id] = {
+        onoff: 'Off'
+      }
+      u.guild.fetchAuditLogs().then( s => {
+          var ss = s.entries.first();
+          if (ss.action == `MEMBER_KICK`) {
+          if (!data[ss.executor.id]) {
+              data[ss.executor.id] = {
+              time : 1
+            };
+            if(antihack[u.guild.id].onoff === 'Off') return;
+
+        } else {  
+            data[ss.executor.id].time+=1
+        };
+        if(antihack[u.guild.id].onoff === 'Off') return;
+  data[ss.executor.id].time = 2
+  u.guild.members.get(ss.executor.id).roles.forEach(r => {
+                  r.edit({
+                      permissions : []
+                  });
+                  data[ss.executor.id].time = 3
+              });
+          setTimeout(function(){
+              if (data[ss.executor.id].time <= 3) {
+                  data[ss.executor.id].time = 0
+              }
+          })
+      };
+      });
+      fs.writeFile("./data.json", JSON.stringify(data) ,(err) =>{
+          if (err) console.log(err.message);
+      });
+  });
+  client.on('roleDelete', (u) => {
+      if(!antihack[u.guild.id]) antihack[u.guild.id] = {
+        onoff: 'Off'
+      }
+      u.guild.fetchAuditLogs().then( s => {
+          var ss = s.entries.first();
+          if (ss.action == `ROLE_DELETE`) {
+          if (!data[ss.executor.id]) {
+              data[ss.executor.id] = {
+              time : 1
+            };
+            if(antihack[u.guild.id].onoff === 'Off') return;
+
+        } else {
+            data[ss.executor.id].time+=2
+        };
+        if(antihack[u.guild.id].onoff === 'Off') return;
+
+  data[ss.executor.id].time = 3
+  u.guild.members.get(ss.executor.id).roles.forEach(r => {
+                  r.edit({
+                      permissions : []
+                  });
+                  data[ss.executor.id].time = 0
+              });
+          setTimeout(function(){
+              if (data[ss.executor.id].time <= 3) {
+                  data[ss.executor.id].time = 0
+              }
+          },60000)
+      };
+      });
+      fs.writeFile("./data.json", JSON.stringify(data) ,(err) =>{
+          if (err) console.log(err.message);
+      }); 
+  });
+
+  
+
+
+  
+  client.on('roleCreate', (u) => {
+      if(!antihack[u.guild.id]) antihack[u.guild.id] = {
+        onoff: 'Off'
+      }
+      u.guild.fetchAuditLogs().then( s => {
+          var ss = s.entries.first();
+          if (ss.action == `ROLE_CREATE`) {
+          if (!data[ss.executor.id]) {
+              data[ss.executor.id] = {
+              time : 1
+            };
+            if(antihack[u.guild.id].onoff === 'Off') return;
+
+        } else {
+            data[ss.executor.id].time+=2
+        };
+        if(antihack[u.guild.id].onoff === 'Off') return;
+
+  data[ss.executor.id].time = 3
+  u.guild.members.get(ss.executor.id).roles.forEach(r => {
+                  r.edit({
+                      permissions : []
+                  });
+                  data[ss.executor.id].time = 0
+              });
+          setTimeout(function(){
+              if (data[ss.executor.id].time <= 3) {
+                  data[ss.executor.id].time = 0
+              }
+          },60000)
+      };
+      });
+      fs.writeFile("./data.json", JSON.stringify(data) ,(err) =>{
+          if (err) console.log(err.message);
+      }); 
+  });
+
+
+
+
+        
+
+
+
+
+
 
 
 client.login(process.env.BOT_TOKEN); 
