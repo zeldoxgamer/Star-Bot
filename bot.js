@@ -599,7 +599,7 @@ if(!message.channel.guild) return;
 
       const embed = new Discord.RichEmbed()
 
-                         .addField('Requested by:', "<@" + message.author.id + ">")
+                         .addField('من طرف:', "<@" + message.author.id + ">")
 
       .setColor(000000)
 
@@ -951,7 +951,7 @@ client.on('message',message =>{
   let embed = new Discord.RichEmbed()
 .setAuthor(message.author.username)
 .setColor("#9B59B6")
-.addField(" **: <@صاحب البوت هو**" , "  **<411613098923786241**")
+.addField(" **صاحب البوت هو**" , "  **<@411613098923786241>**")
   
  message.channel.sendEmbed(embed);
  }
@@ -989,6 +989,8 @@ let embed = new Discord.RichEmbed()
 .addField(`     **${prefix}dac** ` , ' **لمسح كل الرومات** ')
 .addField(`     **${prefix}server** ` , ' **لمعرفة معلومات عن السيرفر** ')
 .addField(`     **${prefix}liste-roles** ` , ' ** لاظهار قائمة رتب السيرفر** ')
+.addField(`     **${prefix}setwelcome**  ` ,' **لانشاء ولكم مع خاصية تمت الدعوة بواسطة** ')
+.addField(`     **${prefix}serleave**  ` ,' **لانشاء رسالة المغادرة** ')
 .setColor('RED')
 message.author.sendEmbed(embed);
 }
