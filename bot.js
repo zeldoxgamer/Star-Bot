@@ -14,7 +14,7 @@
 client.on('message', message => {
   if(message.content.startsWith(`${prefix}inv`)){
     var embed = new Discord.RichEmbed()
-    .setTitle(">> ClickHere To Add" + `${client.user.username}` + " <<")
+    .setTitle(">> ⚫ اضغط هنا لدعوة البوت " + `${client.user.username}` + " <<")
     .setURL("https://discordapp.com/oauth2/authorize?client_id=589217128473952289&permissions=8&scope=bot" + `${client.user.id}` + "&scope=bot&permissions=2080374975")
     .setTimestamp()
     .setFooter(`Requested By | ${message.author.username}`)
@@ -114,7 +114,7 @@ if(message.content.startsWith(prefix + `autorole`)) {
  
   if(!perms) return message.reply(`You don't have permissions, required permission : Manage Roles.`)
   let args = message.content.split(" ").slice(1)
-  if(!args.join(" ")) return message.reply(`${prefix}autorle toggle/setrole [ROLE NAME]`)
+  if(!args.join(" ")) return message.reply(`${prefix}autorole toggle او ${prefix}setrole [ROLE NAME]`)
   let state = args[0]
   if(!state.trim().toLowerCase() == 'toggle' || !state.trim().toLowerCase() == 'setrole') return message.reply(`Please type a right state, ${prefix}modlogs toggle/setrole [ROLE NAME]`)
     if(state.trim().toLowerCase() == 'toggle') {
@@ -131,7 +131,7 @@ if(message.content.startsWith(prefix + `autorole`)) {
          
   }
  
-if(message.content === prefix + 'info') {
+if(message.content === prefix + 'autorole-info') {
     let perms = message.member.hasPermission(`MANAGE_GUILD`)
     if(!perms) return message.reply(`You don't have permissions.`)
     var embed = new Discord.RichEmbed()
@@ -1007,74 +1007,8 @@ msg.delete();
 }); 
 
 
-client.on('message', async message =>{
-  var prefix = "*";
-const ms = require("ms");
-if (message.author.omar) return;
-if (!message.content.startsWith(prefix)) return;
-if(!message.channel.guild) return message.channel.send('').then(m => m.delete(5000));
-if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.reply("**I Don't Have `MANAGE_ROLES` Permission**").then(msg => msg.delete(6000))
-var command = message.content.split(" ")[0];
-command = command.slice(prefix.length);
-var args = message.content.split(" ").slice(1);
-    if(command == "mute") {
-    let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-    if(!tomute) return message.reply("**يجب عليك المنشن اولاّ**:x: ") .then(m => m.delete(5000));
-    if(tomute.hasPermission("MANAGE_MESSAGES"))return      message.channel.send('**للأسف لا أمتلك صلاحية** `MANAGE_MASSAGEES`');
-    let muterole = message.guild.roles.find(`name`, "Muted");
-    //start of create role
-    if(!muterole){
-      try{
-        muterole = await message.guild.createRole({
-          name: "Muted",
-          color: "#070000",
-          permissions:[]
-        })
-        message.guild.channels.forEach(async (channel, id) => {
-          await channel.overwritePermissions(muterole, {
-            SEND_MESSAGES: false,
-            ADD_REACTIONS: false,
-            SPEAK : false
-          });
-        });
-      }catch(e){
-        console.log(e.stack);
-      }
-    }
-    //end of create role
-    let mutetime = args[1];
-    if(!mutetime) return message.reply("**يرجى تحديد وقت الميوت**:x:");
- 
-    await(tomute.addRole(muterole.id));
-message.reply(`<@${tomute.id}> **تم اعطائه ميوت ومدة الميوت** : ${ms(ms(mutetime))}`);
-setTimeout(function(){
-      tomute.removeRole(muterole.id);
-      message.channel.send(`<@${tomute.id}> **انقضى الوقت وتم فك الميوت عن الشخص**:white_check_mark: `);
-    }, ms(mutetime));
- 
- 
- 
-  }
-if(command === `unmute`) {
-  if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.sendMessage("**ليس لديك صلاحية لفك عن الشخص ميوت**:x: ").then(m => m.delete(5000));
-if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.reply("**I Don't Have `MANAGE_ROLES` Permission**").then(msg => msg.delete(6000))
- 
-  let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-  if(!toMute) return message.channel.sendMessage("**عليك المنشن أولاّ**:x: ");
- 
-  let role = message.guild.roles.find (r => r.name === "Muted");
- 
-  if(!role || !toMute.roles.has(role.id)) return message.channel.sendMessage("**لم يتم اعطاء هذه شخص ميوت من الأساس**:x:")
- 
-  await toMute.removeRole(role)
-  message.channel.sendMessage("**لقد تم فك الميوت عن شخص بنجاح**:white_check_mark:");
- 
-  return;
- 
-  }
- 
-});
 
+ 
 
   
 
@@ -1159,35 +1093,11 @@ client.on("message", async msg => { // message ?
 
  
 
-let inv_room = "597025240626888706" // room id
 
-client.on('guildMemberAdd', async member => { // membed add event
 
-    member.guild.fetchInvites().then(async guildInvites => { // fetch invites ?
+        // end if
 
-            const inv = invites[member.guild.id]; // get invite :)
-
-            invites[member.guild.id] = guildInvites; // push guild invites on invites
-
-            let invite = guildInvites.find(i => inv.get(i.code).uses < i.uses); // find ?
-
-            let res = await SQLite.get(`SELECT * FROM linkSysteme WHERE code = '${invite.code}'`) // select from sql
-
-            if(!res) { // if the code does'nt exists
-
-            console.log(invite.code) // for test
-
-            client.channels.get(inv_room).send("**Welcom To "+member.guild.name+"🌹 .\n       Joined By: "+invite.inviter+".**") // send message to welcome room
-
-            } else { // if the code link exitst
-
-                client.channels.get(inv_room).send("**Welcom To "+member.guild.name+"🌹 .\n       Joined By: <@!"+res.id+">.**") // send message to welcome room
-
-                console.log(res.code) // for test
-
-        } // end if
-
-    }); // end fetchs :)
+   
 
 }); // end events :) ) )) ))  )) )) )) )) ) )) ))
 
@@ -1229,7 +1139,7 @@ client.on('message', message => {
   let embed = new Discord.RichEmbed()
 .setAuthor(message.author.username)
 .setColor("#9B59B6")
-.addField(" **اصدار اابوت هو**" , `Version: ${version}`)
+.addField(" **اصدار البوت هو**" , `Version: ${version}`)
   
  message.channel.sendEmbed(embed);
  }
@@ -1280,7 +1190,7 @@ let embed = new Discord.RichEmbed()
 .addField(`     **${prefix}server** ` , ' **لمعرفة معلومات عن السيرفر** ')
 .addField(`     **${prefix}liste-roles** ` , ' ** لاظهار قائمة رتب السيرفر** ')
 .addField(`     **${prefix}setwelcome**  ` ,' **لانشاء ولكم مع خاصية تمت الدعوة بواسطة** ')
-.addField(`     **${prefix}setleave**  ` ,' **لانشاء رسالة المغادرة** ')
+.addField(`     **${prefix}points** ` ,' **لمعرة النقاط** '(
 .setColor('RED')
 message.author.sendEmbed(embed);
 }
