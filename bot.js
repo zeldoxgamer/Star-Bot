@@ -843,7 +843,55 @@ user.send(`تم اعطائك باند في ${message.guild.name} السبب: ${r
 
 
 
+ 
 
+client.on('message', message => {
+
+    if (message.content.startsWith(`${prefix}ping`)) {
+
+      message.channel.send({
+
+ embed: new Discord.RichEmbed() 
+
+    .setColor('RED')
+
+    .addField('**الذاكرة المستخدمة 💾**', `${(process.memoryUsage().rss / 1000000).toFixed()}MB`, true)
+
+         .addField('**سرعة الاتصال📡**' , `${Date.now() - message.createdTimestamp}` + ' ms')
+
+        .addField('**وقت الاقلاع⌚**', timeCon(process.uptime()), true)
+
+        .addField('**استخدام المعالج💿**', `${(process.cpuUsage().rss / 10000).toFixed()}%`, true)
+
+     })
+
+    }
+
+  });
+
+  function timeCon(time) {
+
+    let days = Math.floor(time % 31536000 / 86400)
+
+    let hours = Math.floor(time % 31536000 % 86400 / 3600)
+
+    let minutes = Math.floor(time % 31536000 % 86400 % 3600 / 60)
+
+    let seconds = Math.round(time % 31536000 % 86400 % 3600 % 60)
+
+    days = days > 9 ? days : '0' + days
+
+    hours = hours > 9 ? hours : '0' + hours
+
+    minutes = minutes > 9 ? minutes : '0' + minutes
+
+    seconds = seconds > 9 ? seconds : '0' + seconds
+
+    return `${days > 0 ? `${days}:` : ''}${(hours || days) > 0 ? `${hours}:` : ''}${minutes}:${seconds}`
+
+};
+
+ 
 
 
 
@@ -1037,71 +1085,29 @@ const invites = {}; // Codes
 
  
 
-client.on("ready", () => { // ready ?
 
-    client.guilds.forEach(g => { // for each guilds ?
+client.on('message', message => {
+    if (!message.guild) return;
+    if (message.content.startsWith("رابط")) {
 
-        g.fetchInvites().then(guildInvites => { // fetch invites ?
+        message.channel.createInvite({
+        thing: true,
+        maxUses: 5,
+        maxAge: 86400
+    }).then(invite =>
+      message.author.sendMessage(invite.url)
+    )
+  message.channel.send(`** تم أرسال الرابط برسالة خاصة **`)
 
-                invites[g.id] = guildInvites; // push guild invites on invites ^^
-
-        }); // end
-
-}); // end
-
-}); // end
-
-SQLite.open(path.join(__dirname, 'links.sql')) // read path ?
-
-.then(() => { // then ?
-
-    console.log('Opened') // seccussfull opened
-
-    SQLite.run(`CREATE TABLE IF NOT EXISTS linkSysteme (code TEXT, id VARCHAR(30))`) // create table if not exisit
-
-}) // end
-
-.catch(err => console.error(err)) // on error
-
- 
-
-client.on("message", async msg => { // message ?
-
-    if(msg.author.bot || !msg.channel.guild) return; // if bot or private return
-
-    if(msg.content.startsWith("رابط")) { // message content
-
-        let invite = await msg.channel.createInvite({ //  create invites
-
-            maxAge: 86400, // one day // limit time for invite ^^
-
-            maxUses: 5 // 5 people can enter // limit users for invites ^^
-
-        }, `Requested by ${msg.author.tag}`).catch(console.log); // reason // end
-
-       
-
-        SQLite.run(`INSERT INTO linkSysteme VALUES ('${invite.code}','${msg.author.id}')`) // insert into table
-
-        msg.author.send(invite ? /*seccussfull*/`**مدة الرابط : يـوم عدد استخدامات الرابط : 5 **:\n ${invite}` /*error catch*/: "يوجد خلل في البوت :( \n  يتم حل المشكل قريبا ...");
-
+      message.author.send(`**مدة الرابط : يـوم
+ عدد استخدامات الرابط : 5 **`)
     }
-
- 
-
-})
-
- 
+});
 
 
 
-        // end if
 
-   
 
-}); // end events :) ) )) ))  )) )) )) )) ) )) ))
-
- 
 
 client.on('message',message =>{
   var command = message.content.toLowerCase().split(" ")[0];
