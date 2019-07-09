@@ -940,11 +940,23 @@ client.on('message',message =>{
   let embed = new Discord.RichEmbed()
 .setAuthor(message.author.username)
 .setColor("#9B59B6")
-.addField(" ** :gear: Server Support :gear: **" , "  **https://discord.gg/hcR4MU**")
+.addField(" ** :gear: سيرفر الدعم الفني للبوت :gear: **" , "  **https://discord.gg/6qE6CtT**")
   
  message.channel.sendEmbed(embed);
  }
 });
+
+client.on('message', message => {
+  if (message.content === `${prefix}version`) {
+  let embed = new Discord.RichEmbed()
+.setAuthor(message.author.username)
+.setColor("#9B59B6")
+.addField(" **اصدار اابوت هو**" , `Version: ${version})
+  
+ message.channel.sendEmbed(embed);
+ }
+});
+
 
   client.on('message', message => {
   if (message.content === `${prefix}own`) {
@@ -990,7 +1002,7 @@ let embed = new Discord.RichEmbed()
 .addField(`     **${prefix}server** ` , ' **لمعرفة معلومات عن السيرفر** ')
 .addField(`     **${prefix}liste-roles** ` , ' ** لاظهار قائمة رتب السيرفر** ')
 .addField(`     **${prefix}setwelcome**  ` ,' **لانشاء ولكم مع خاصية تمت الدعوة بواسطة** ')
-.addField(`     **${prefix}serleave**  ` ,' **لانشاء رسالة المغادرة** ')
+.addField(`     **${prefix}setleave**  ` ,' **لانشاء رسالة المغادرة** ')
 .setColor('RED')
 message.author.sendEmbed(embed);
 }
@@ -1013,6 +1025,7 @@ let embed = new Discord.RichEmbed()
 .addField(`     **${prefix}id** ` ,' **لمعرفة الهوية** ')
 .addField(`     **${prefix}credit**  ` ,' **لمعرفة رصيد** ')
 .addField(`     **${prefix}daily** ` ,' **المكافئة اليومية** ')
+.addFielf(`     **${prefix}trans** ` ,' **لتحويل الكريديتس الى صديق** ')
 .addField(`     **${prefix}avatar**  ` ,' **لرؤيت صورت الحساب** ')
 .addField(`     **${prefix}av-ser** ` ,' **لرؤيت صورت السيرفر** ')
 .addField(`     **${prefix}profile**  ` ,' **لمعرفة معلومات الحساب** ')
@@ -1109,7 +1122,7 @@ client.on('message', message => {
     if (message.content.startsWith(prefix + "h-music")) {
 let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
-.addField(`     **soon** ` ,' **قريبا** ')
+.addField(`     **Music Coming soon** ` ,' **قريبا** ')
 .setColor('WHITE')
 message.author.sendEmbed(embed);
 }
