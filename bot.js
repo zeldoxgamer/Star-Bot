@@ -14,7 +14,18 @@ const antijoin = JSON.parse(fs.readFileSync('./antijoin.json' , 'utf8'));
 let antibots = JSON.parse(fs.readFileSync('./antibots.json' , 'utf8'));
 
 
-
+client.on('message', message => {
+  if(message.content.startsWith(`${prefix}inv`)){
+    var embed = new Discord.RichEmbed()
+    .setTitle(">> ClickHere To Add" + `${client.user.username}` + " <<")
+    .setURL("https://discordapp.com/oauth2/authorize?client_id=589217128473952289&permissions=8&scope=bot" + `${client.user.id}` + "&scope=bot&permissions=2080374975")
+    .setTimestamp()
+    .setFooter(`Requested By | ${message.author.username}`)
+    .setColor("RANDOM")
+    message.channel.send(":white_check_mark: | Check Your DM! تم الأرسال بلخاص")
+    message.author.send({embed})
+  }
+});
 
 
 
@@ -472,7 +483,7 @@ if(log) return log.send(gtg);
 
 
      client.on('ready', () => {
-     client.user.setActivity(`${prefix}help | vr: ${version}`,{type: 'Streaming'});
+     client.user.setActivity(`${prefix}help | ${prefix}inv`,{type: 'Watching'});
 
 });  
        
