@@ -9,10 +9,7 @@
  const token = 'BOT_TOKEN'; 
  const version = "1.1.2";
  const r1 = require('node-fetch'); 
-const antihack = JSON.parse(fs.readFileSync('./antihack.json' , 'utf8'));
-const antijoin = JSON.parse(fs.readFileSync('./antijoin.json' , 'utf8'));
-let antibots = JSON.parse(fs.readFileSync('./antibots.json' , 'utf8'));
-
+ const antihack = JSON.parse(fs.readFileSync('./antihack.json' , 'utf8'));
 
 client.on('message', message => {
   if(message.content.startsWith(`${prefix}inv`)){
